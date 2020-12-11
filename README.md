@@ -1,5 +1,5 @@
 # Salaries
-[![Build Status](https://travis-ci.com/jesse-spevack/salaries.svg?branch=main)] [![Ruby Style Guide](https://img.shields.io/badge/code_style-rubocop-brightgreen.svg)](https://github.com/rubocop-hq/rubocop)
+![Build Status](https://travis-ci.com/jesse-spevack/salaries.svg?branch=main) [![Maintainability](https://api.codeclimate.com/v1/badges/c9e025f8ea78948395cc/maintainability)](https://codeclimate.com/github/jesse-spevack/salaries/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/c9e025f8ea78948395cc/test_coverage)](https://codeclimate.com/github/jesse-spevack/salaries/test_coverage) [![Ruby Style Guide](https://img.shields.io/badge/code_style-rubocop-brightgreen.svg)](https://github.com/rubocop-hq/rubocop)
 
 An application for anonymously sharing salary information within the Turing community.
 
