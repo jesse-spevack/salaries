@@ -1,7 +1,0 @@
-version: "2"
-exclude_patterns:
-  - bin/
-  - config/
-  - db/
-  - vendor/
-  - tmp/
