@@ -1,5 +1,5 @@
 # Salaries
-[![Build Status](https://travis-ci.com/jesse-spevack/salaries.svg?branch=main)] [![Ruby Style Guide](https://img.shields.io/badge/code_style-rubocop-brightgreen.svg)](https://github.com/rubocop-hq/rubocop)
+![Build Status](https://travis-ci.com/jesse-spevack/salaries.svg?branch=main) [![Ruby Style Guide](https://img.shields.io/badge/code_style-rubocop-brightgreen.svg)](https://github.com/rubocop-hq/rubocop)
 
 An application for anonymously sharing salary information within the Turing community.
 
