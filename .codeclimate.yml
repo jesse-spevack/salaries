@@ -6,6 +6,8 @@ plugins:
       enabled: true
     csslint:
       enabled: true
+    eslint:
+      enabled: true
     flog:
       enabled: true
       config:
