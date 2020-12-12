@@ -48,7 +48,7 @@ end
 
 group :test do
   gem "shoulda-matchers"
-  gem "simplecov", "~> 0.17", require: false
+  gem "simplecov", require: false
 end
 
 group :development do
