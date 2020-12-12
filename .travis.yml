@@ -25,6 +25,6 @@ script:
   - bundle exec rails webpacker:compile
   - bundle exec rspec
 after_script:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+  - ./cc-test-reporter after-build -t simplecov --debug --exit-code $TRAVIS_TEST_RESULT
 notifications:
   email: false
