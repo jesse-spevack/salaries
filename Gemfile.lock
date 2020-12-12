@@ -305,7 +305,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails (>= 6)
   shoulda-matchers
-  simplecov
+  simplecov (~> 0.17)
   spring
   standard (~> 0.10)
   turbolinks (~> 5)
