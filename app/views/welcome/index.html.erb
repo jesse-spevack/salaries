@@ -1,4 +1,10 @@
-<h2>Hello World</h2>
+<h2>Welcome to Salaries</h2>
+<% if @current_user %>
+  <h3>Sack id: <%= @current_user.slack_id %></h3>
+  <%= link_to 'Logout', logout_path, method: :delete %>
+<% else %>
+  <a href="auth/slack"><img src="https://api.slack.com/img/sign_in_with_slack.png"/></a>
+<% end %>
 <p>
   The time is now: <%= Time.now %>
 </p>
