@@ -50,7 +50,7 @@ group :development, :test do
 end
 
 group :test do
-  gem 'simplecov'
+  gem 'simplecov', require: false
   gem 'shoulda-matchers'
 end
 
