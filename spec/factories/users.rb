@@ -2,6 +2,6 @@
 
 FactoryBot.define do
   factory :user do
-    slack_id { '12345ABCDEF' }
+    slack_id { "12345ABCDEF" }
   end
 end

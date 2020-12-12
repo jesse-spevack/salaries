@@ -5,7 +5,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     :slack,
     Figaro.env.turing_slack_client_id,
     Figaro.env.turing_slack_client_secret,
-    scope: 'users:read',
+    scope: "users:read",
     team: Figaro.env.turing_slack_team_id
   )
 end
