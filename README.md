@@ -21,3 +21,13 @@ $ bundle install
 ```
 
 We welcome contributions in the form of feature development and copy writing. If you have an idea for how to improve this application, please create an issue.
+
+## Troubleshooting tips
+
+In case `Webpacker can't find application.js` run:
+```bash
+rm -rf node_modules
+rails assets:clobber
+yarn
+rails assets:precompile
+```
