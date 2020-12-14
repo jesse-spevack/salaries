@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  ruby: circleci/ruby@1.1.1
+  ruby: circleci/ruby@1.1.2
   node: circleci/node@4.1.0
 
 commands:
@@ -41,7 +41,6 @@ jobs:
           node-version: 12.18.3
       - node/install-packages:
           pkg-manager: yarn
-      - run: yarn run test
       - wait-for-datastores
       - run: bin/rails db:create db:schema:load
       - ruby/rspec-test
