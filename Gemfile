@@ -40,6 +40,7 @@ group :development, :test do
 
   gem "capybara", ">= 3.34"
   gem "factory_bot_rails"
+  gem "rspec_junit_formatter"
   gem "rspec-rails"
   gem "webdrivers"
 
