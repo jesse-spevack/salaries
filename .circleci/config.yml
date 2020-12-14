@@ -44,6 +44,10 @@ jobs:
       - wait-for-datastores
       - run: bin/rails db:create db:schema:load
       - ruby/rspec-test
+      - run:
+          name: Run Standard RB check
+          command: bundle exec standardrb --format progress
+
 
 workflows:
   check_and_test:
