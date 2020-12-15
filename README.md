@@ -23,9 +23,9 @@ Subsequent projects will be scoped to give users the ability to submit granular 
 
 ## Technology
 This project proudly uses:
-[Ruby on Rails](https://rubyonrails.org/)
-[Stimulus](https://stimulusjs.org/)
-[Heroku](https://www.heroku.com/)
+- [Ruby on Rails](https://rubyonrails.org/)
+- [Stimulus](https://stimulusjs.org/)
+- [Heroku](https://www.heroku.com/)
 
 ## Contributing
 Follow the steps below to setup salaries locally
