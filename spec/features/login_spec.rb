@@ -17,5 +17,6 @@ RSpec.describe "Logging in with slack", type: :feature do
     click_link
     expect(page).to have_content(user.slack_id)
     expect(page).to have_link("Logout")
+    expect(current_path).to eq profile_path
   end
 end

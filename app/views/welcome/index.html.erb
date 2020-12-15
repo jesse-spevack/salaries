@@ -5,14 +5,7 @@
       Welcome to Salaries
     </h2>
     <div class="mt-6 grid justify-items-center">
-      <% if @current_user %>
-        <h3 class="text-center text-lg">
-          Your Turing Slack ID: <%= @current_user.slack_id %>
-        </h3>
-        <%= link_to 'Logout', logout_path, method: :delete, class: "mt-3 text-lg no-underline hover:underline" %>
-      <% else %>
-          <a href="auth/slack"><img src="https://api.slack.com/img/sign_in_with_slack.png"/></a>
-      <% end %>
+      <a href="auth/slack"><img src="https://api.slack.com/img/sign_in_with_slack.png"/></a>
       <p class="mt-6 text-sm">
         The time is now: <%= Time.now %>
       </p>
