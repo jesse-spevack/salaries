@@ -34,8 +34,12 @@ $ git clone https://github.com/jesse-spevack/salaries.git
 $ cd salaries
 $ gem install bundler # if working with ruby version below 2.7.1
 $ bundle install
+$ rails db:{create,migrate} # set up development and test databases
+$ yarn
 $ bundle exec rspec # run tests
 $ bundle exec standardrb --format progress # run standard ruby linter
+$ rails s # start the local server to check that app can successfully run
+# ctrl + c shuts down local server
 ```
 
 We welcome contributions in the form of feature development and copy writing. If you have an idea for how to improve this application, please create an issue.
