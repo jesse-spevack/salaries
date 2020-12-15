@@ -28,17 +28,38 @@ This project proudly uses:
 [Heroku](https://www.heroku.com/)
 
 ## Contributing
-Follow the steps below to setup salaries locally:
+Follow the steps below to setup salaries locally
+
+### System Requirements
+- Ruby 2.7.2
+  ```bash
+  # assuming you already have homebrew installed
+  $ brew update && brew upgrade ruby-build
+  $ rbenv install 2.7.2
+  $ rbenv local 2.7.2 # set the Ruby version for the current directory
+  $ ruby -v # double check that the Ruby version was successfully changed to 2.7.2
+  ```
+- Rails 6.1.0
+- PostgreSQL
+  - Download latest version of [Postgres.app](https://postgresapp.com/downloads.html)
+  - Install the [CLI tools](https://postgresapp.com/documentation/cli-tools.html)
+  - Optional: install [Postico](https://eggerapps.at/postico/), a PostgreSQL GUI  
+
+_Rails and other gem dependencies will be automatically installed by Bundler._
+
+
+
+### Local Setup
 ```bash
 $ git clone https://github.com/jesse-spevack/salaries.git
 $ cd salaries
 $ gem install bundler # if working with ruby version below 2.7.1
 $ bundle install
-$ rails db:{create,migrate} # set up development and test databases
+$ rails db:{create,migrate} # configure dev and test databases
 $ yarn
 $ bundle exec rspec # run tests
 $ bundle exec standardrb --format progress # run standard ruby linter
-$ rails s # start the local server to check that app can successfully run
+$ rails s # run local server to check that app can successfully launches
 # ctrl + c shuts down local server
 ```
 
@@ -46,10 +67,26 @@ We welcome contributions in the form of feature development and copy writing. If
 
 ## Troubleshooting tips
 
-In case `Webpacker can't find application.js` run:
+- In case `Webpacker can't find application.js` run:
 ```bash
 rm -rf node_modules
 rails assets:clobber
 yarn
 rails assets:precompile
 ```
+
+- If you run into the following macOS 11.0 error when updating homebrew and rbenv:
+```bash
+Error: Your CLT does not support macOS 11.0.
+It is either outdated or was modified.
+Please update your CLT or delete it if no updates are available.
+Error: An exception occurred within a child process:
+  SystemExit: exit
+```
+
+  Run the following commands:
+  ```bash
+  $ sudo rm -rf /Library/Developer/CommandLineTools
+  $ sudo xcode-select --install
+  # `brew update && brew upgrade ruby-build` should now run successfully
+  ```
