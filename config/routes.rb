@@ -4,4 +4,6 @@ Rails.application.routes.draw do
 
   get "auth/slack/callback", to: "sessions#create"
   delete "logout", to: "sessions#destroy"
+
+  get "profile", to: "users#show"
 end

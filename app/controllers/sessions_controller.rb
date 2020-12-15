@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 class SessionsController < ApplicationController
+  skip_before_action :require_login, only: [:create]
+
   def create
     @user = User.find_or_create_by(slack_id: auth_hash.info.user_id)
     session[:user_id] = @user.id
-    redirect_to root_url
+    redirect_to profile_path
   end
 
   def destroy
