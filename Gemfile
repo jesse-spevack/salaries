@@ -22,9 +22,11 @@ gem "jbuilder", "~> 2.7"
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+# Authorization
 gem "omniauth"
 gem "omniauth-slack"
 
+# Secrets
 gem "figaro"
 
 # Use Active Storage variant
@@ -32,6 +34,9 @@ gem "figaro"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", ">= 1.4.4", require: false
+
+# Utilities
+gem "awesome_print"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
