@@ -14,6 +14,12 @@ The Turing School of Software Design has a mission to:
 
 We believe that a small part of achieving that mission involves sharing salary data within the Turing community. While salary information has been available in a variety of forms for years, this project is an attempt to systematize the process.
 
+## User Anonymity
+Many people are uncomfortable sharing their salaries, but feel less averse to providing that information anonymously. For that reason, we take the following steps to ensure user anonymity.
+1. Users authenticate using Turing Slack, which ensures that only members of the Turing community can use this application.
+2. The only data returned to this app through the slack authentication process we touch is the user's `slack_id`. We do not look at any other data returned via the oauth request flow.
+3. Rather than saving the slack_id to our database, and thus undermining the goal of preserving anonymity, we hash the slack_id using a one way, deterministic hashing algorithm. It is not possible to get back to the user's `slack_id` from the hashed version in our database. For more information we encourage you to review this [pr](https://github.com/jesse-spevack/salaries/pull/37).
+
 ## Project Road Map
 We are currently working to produce an MVP defined [here](https://github.com/jesse-spevack/salaries/projects/1). The key features of the MVP include:
 - Turing slack login

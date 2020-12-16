@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
   skip_before_action :require_login, only: [:create]
 
   def create
-    @user = User.find_or_create_by(slack_id: auth_hash.info.user_id)
+    @user = authentication_service.find_or_create_user
     session[:user_id] = @user.id
     redirect_to profile_path
   end
@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
 
   private
 
-  def auth_hash
-    request.env["omniauth.auth"]
+  def authentication_service
+    AuthenticationService.new(request.env["omniauth.auth"])
   end
 end
