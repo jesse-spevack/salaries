@@ -16,6 +16,9 @@
 
 require "simplecov"
 require "simplecov_json_formatter"
+require "super_diff/rspec"
+require "super_diff/active_support"
+
 SimpleCov.start
 SimpleCov.formatter = SimpleCov::Formatter::JSONFormatter
 
