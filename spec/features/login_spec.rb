@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe "Logging in with slack", type: :feature do
   let(:slack_id) { "raw_slack_id_12345" }
   let(:hashed_id) { Digest::SHA256.hexdigest(slack_id) }
-  let(:user) { create(:user, slack_id: hashed_id) }
+  let!(:user) { create(:user, slack_id: hashed_id) }
 
   before do
     OmniAuth.config.test_mode = true
@@ -16,7 +16,7 @@ RSpec.describe "Logging in with slack", type: :feature do
 
   scenario "shows logout link" do
     visit root_path
-    click_link
+    click_link "slack-login"
     expect(page).to have_content(hashed_id)
     expect(page).to have_link("Logout")
     expect(current_path).to eq profile_path

@@ -25,7 +25,11 @@ RSpec.describe Salary, type: :model do
       it "must be blank if salary is current salary" do
         expect {
           create(:salary, :current, end_date: 1.day.ago)
-        }.to raise_error(ActiveRecord::RecordInvalid, /End date must be after the start date./)
+        }.to raise_error(ActiveRecord::RecordInvalid, /End date must be blank when this is a current salary./)
+      end
+
+      it "can have blank end date if salary is current salary" do
+        expect(create(:salary, :current, end_date: nil)).to be_valid
       end
     end
   end
