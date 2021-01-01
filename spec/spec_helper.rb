@@ -16,6 +16,8 @@
 
 require "simplecov"
 require "simplecov_json_formatter"
+Dir["./spec/support/helpers/*.rb"].sort.each { |file| require file }
+
 SimpleCov.start
 SimpleCov.formatter = SimpleCov::Formatter::JSONFormatter
 
