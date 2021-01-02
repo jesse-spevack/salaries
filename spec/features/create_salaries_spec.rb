@@ -12,7 +12,6 @@ RSpec.describe "Creating salaries", type: :feature do
     click_on "Save"
 
     expect(current_path).to eq profile_path
-    save_and_open_page
-    expect(page).to have_content(80_000)
+    expect(page).to have_content("$80,000.00")
   end
 end
