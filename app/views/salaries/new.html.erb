@@ -1,0 +1,56 @@
+<div class="md:container md:mx-auto">
+
+  <%= form_with(model: @salary) do |form| %>
+    <% if @salary.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@salary.errors.count, "error") %> prohibited this salary from being saved:</h2>
+
+        <ul>
+          <% @salary.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="grid grid-cols-4 gap-4 font-bold mb-1 text-gray-700">
+      <div class="inline-block align-middle">
+        <%= form.label :amount %>
+        <%= form.number_field :amount, class: "mb-3 pt-0" %>
+      </div>
+
+      <div class="inline-block align-middle">
+        <%= form.label :start_date %>
+        <%= form.text_field :start_date,
+            data: {
+              controller: "flatpickr",
+              flatpickr_date_format: "Y-m-d"
+            }
+        %>
+      </div>
+
+      <div>
+        <%= form.label :end_date %>
+        <%= form.text_field :end_date,
+          data: {
+            controller: "flatpickr",
+            flatpickr_date_format: "Y-m-d"
+          }
+        %>
+      </div>
+
+      <div>
+        <label class="inline-flex items-center mt-r">
+          <%= form.check_box :current_salary, class: "form-checkbox h-5 w-5 text-gray-700" %>
+          <span class="ml-2 font-bold text-gray-700">Current Salary</span>
+        </label>
+
+      </div>
+    </div>
+
+    <div class="actions">
+      <%= form.submit "Save" %>
+    </div>
+  <% end %>
+
+</div>
