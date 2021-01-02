@@ -56,6 +56,7 @@ end
 group :test do
   gem "shoulda-matchers"
   gem "simplecov", require: false
+  gem "super_diff"
 end
 
 group :development do
