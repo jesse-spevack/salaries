@@ -13,43 +13,73 @@
       </div>
     <% end %>
 
-    <div class="grid grid-cols-4 gap-4 font-bold mb-1 text-gray-700">
-      <div class="inline-block align-middle">
-        <%= form.label :amount %>
-        <%= form.number_field :amount, class: "mb-3 pt-0" %>
-      </div>
-
-      <div class="inline-block align-middle">
-        <%= form.label :start_date %>
-        <%= form.text_field :start_date,
-            data: {
-              controller: "flatpickr",
-              flatpickr_date_format: "Y-m-d"
-            }
-        %>
-      </div>
-
+  <div class="py-10">
+    <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
       <div>
-        <%= form.label :end_date %>
-        <%= form.text_field :end_date,
+        <h3 class="text-lg leading-6 font-medium text-gray-900">
+          Salary
+        </h3>
+        <p class="mt-1 max-w-2xl text-sm text-gray-500">
+          This information will be aggregated into the Turing Salaries data set.
+        </p>
+      </div>
+      <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+        <%= form.label :amount, class: "block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2" %>
+
+        <div class="mt-1 sm:mt-0 sm:col-span-2">
+          <%= form.number_field :amount, class: "max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md" %>
+        </div>
+      </div>
+
+      <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+        <span class="flex-grow flex flex-col" id="toggleLabel">
+          <span class="text-sm font-medium text-gray-900">Current salary</span>
+        </span>
+        <!-- On: "bg-indigo-600", Off: "bg-gray-200" -->
+        <button type="button" aria-pressed="false" class="bg-gray-200 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+          <span class="sr-only">Use setting</span>
+          <!-- On: "translate-x-5", Off: "translate-x-0" -->
+          <span aria-hidden="true" class="translate-x-0 inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200"></span>
+        </button>
+      </div>
+
+      <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+        <%= form.label :start_date, class: "block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2" %>
+        <div class="mt-1 sm:mt-0 sm:col-span-2">
+          <%= form.text_field :start_date,
+              class: "max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md",
+              data: {
+                controller: "flatpickr",
+                flatpickr_date_format: "Y-m-d"
+              }
+          %>
+        </div>
+      </div>
+
+      <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+        <%= form.label :end_date, class: "block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2" %>
+        <div class="mt-1 sm:mt-0 sm:col-span-2">
+          <%= form.text_field :end_date,
+              class: "max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md",
+              data: {
+                controller: "flatpickr",
+                flatpickr_date_format: "Y-m-d"
+              }
+          %>
+        </div>
+      </div>
+
+      <%= form.check_box :current_salary, 
+          class: "",
           data: {
-            controller: "flatpickr",
-            flatpickr_date_format: "Y-m-d"
           }
-        %>
-      </div>
-
-      <div>
-        <label class="inline-flex items-center mt-r">
-          <%= form.check_box :current_salary, class: "form-checkbox h-5 w-5 text-gray-700" %>
-          <span class="ml-2 font-bold text-gray-700">Current Salary</span>
-        </label>
-
-      </div>
+      %>
     </div>
 
-    <div class="actions">
-      <%= form.submit "Save" %>
+    <div class="pt-5">
+      <div class="flex justiy-end">
+        <%= form.submit "Save", class: "ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+      </div>
     </div>
   <% end %>
 
