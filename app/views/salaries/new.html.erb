@@ -1,5 +1,4 @@
 <div class="md:container md:mx-auto">
-
   <%= form_with(model: @salary) do |form| %>
     <% if @salary.errors.any? %>
       <div id="error_explanation">
@@ -13,7 +12,14 @@
       </div>
     <% end %>
 
-  <div class="py-10">
+  <div class="py-10"
+    data-controller="toggle"
+    data-toggle-on-class="bg-indigo-600"
+    data-toggle-off-class="bg-gray-600"
+    data-toggle-translate-on-class="translate-x-5"
+    data-toggle-translate-off-class="translate-x-0"
+    data-toggle-invisible-class="invisible"
+  >
     <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
       <div>
         <h3 class="text-lg leading-6 font-medium text-gray-900">
@@ -23,9 +29,9 @@
           This information will be aggregated into the Turing Salaries data set.
         </p>
       </div>
+
       <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
         <%= form.label :amount, class: "block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2" %>
-
         <div class="mt-1 sm:mt-0 sm:col-span-2">
           <%= form.number_field :amount, class: "max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md" %>
         </div>
@@ -33,14 +39,32 @@
 
       <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
         <span class="flex-grow flex flex-col" id="toggleLabel">
-          <span class="text-sm font-medium text-gray-900">Current salary</span>
+          <span class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Current salary</span>
         </span>
-        <!-- On: "bg-indigo-600", Off: "bg-gray-200" -->
-        <button type="button" aria-pressed="false" class="bg-gray-200 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+
+        <!-- On: "bg-indigo-600", Off: "bg-gray-600" -->
+
+        <button type="button" 
+          data-action="toggle#update"
+          data-toggle-target="button" 
+          aria-pressed="false"
+          class="bg-gray-600 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        >
           <span class="sr-only">Use setting</span>
           <!-- On: "translate-x-5", Off: "translate-x-0" -->
-          <span aria-hidden="true" class="translate-x-0 inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200"></span>
+          <span 
+            data-toggle-target="switch"
+            aria-hidden="true" 
+            class="translate-x-0 inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200">
+          </span>
         </button>
+
+        <%= form.check_box :current_salary, 
+            class: "hidden",
+            data: {
+              toggle_target: "checkbox"
+            }
+        %>
       </div>
 
       <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
@@ -56,7 +80,9 @@
         </div>
       </div>
 
-      <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+      <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5"
+        data-toggle-target="endDate" 
+      >
         <%= form.label :end_date, class: "block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2" %>
         <div class="mt-1 sm:mt-0 sm:col-span-2">
           <%= form.text_field :end_date,
@@ -68,15 +94,9 @@
           %>
         </div>
       </div>
-
-      <%= form.check_box :current_salary, 
-          class: "",
-          data: {
-          }
-      %>
     </div>
 
-    <div class="pt-5">
+    <div class="pt-8">
       <div class="flex justiy-end">
         <%= form.submit "Save", class: "ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
       </div>
