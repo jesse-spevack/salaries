@@ -8,4 +8,12 @@ RSpec.describe User, type: :model do
   describe "associations" do
     it { should have_many(:salaries) }
   end
+
+  describe "display_slack_id" do
+    subject(:user) { build(:user) }
+
+    it "returns a shortened id for display" do
+      expect(user.display_slack_id).to eq user.slack_id[0..10] + "..."
+    end
+  end
 end

@@ -5,10 +5,10 @@ RSpec.describe "Creating salaries", type: :feature do
 
   scenario "takes place on user profile page" do
     visit profile_path(user)
-    click_link "Add Salary"
+    click_link "New Salary"
     fill_in("Amount", with: 80_000)
     fill_in("salary_start_date", with: 1.year.ago)
-    check("Current Salary")
+    check("salary_current_salary")
     click_on "Save"
 
     expect(current_path).to eq profile_path
