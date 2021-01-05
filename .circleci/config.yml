@@ -17,7 +17,7 @@ jobs:
   test:
     working_directory: ~/project
     docker:
-      - image: circleci/ruby:2.7.2-browsers
+      - image: circleci/ruby:3.0.0-browsers
         environment:
           PGHOST: 127.0.0.1
           PGUSER: salaries-circleci
