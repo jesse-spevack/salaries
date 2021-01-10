@@ -7,6 +7,7 @@ RSpec.describe User, type: :model do
 
   describe "associations" do
     it { should have_many(:salaries) }
+    it { should have_one(:profile) }
   end
 
   describe "display_slack_id" do
