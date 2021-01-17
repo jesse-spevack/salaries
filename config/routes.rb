@@ -7,5 +7,5 @@ Rails.application.routes.draw do
 
   get "profile", action: :show, controller: "users"
   resources :salaries
-  resources :profiles
+  resources :profiles, only: [:create, :update]
 end
