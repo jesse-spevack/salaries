@@ -16,6 +16,7 @@
 
 require "simplecov"
 require "simplecov_json_formatter"
+require "./spec/support/omniauth_helper"
 
 SimpleCov.start
 SimpleCov.formatter = SimpleCov::Formatter::JSONFormatter
@@ -98,4 +99,5 @@ RSpec.configure do |config|
   #   # test failures related to randomization by passing the same `--seed` value
   #   # as the one that triggered the failure.
   #   Kernel.srand config.seed
+  config.include(OmniauthHelper)
 end

@@ -9,4 +9,8 @@ class User < ApplicationRecord
   def display_slack_id
     slack_id[0..10] + "..."
   end
+
+  def profile_first_or_initialize
+    profile || Profile.new(user: self)
+  end
 end
