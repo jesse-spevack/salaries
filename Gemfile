@@ -40,7 +40,6 @@ gem "awesome_print"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
   gem "pry"
   gem "pry-byebug"
 
@@ -54,6 +53,7 @@ group :development, :test do
 end
 
 group :test do
+  gem "selenium-webdriver"
   gem "shoulda-matchers"
   gem "simplecov", require: false
 end
