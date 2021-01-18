@@ -6,8 +6,8 @@ RSpec.describe User, type: :model do
   end
 
   describe "associations" do
-    it { should have_many(:salaries) }
-    it { should have_one(:profile) }
+    it { should have_many(:salaries).dependent(:destroy) }
+    it { should have_one(:profile).dependent(:destroy) }
   end
 
   describe "#display_slack_id" do
@@ -18,7 +18,7 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe "#first_or_initialize" do
+  describe "#profile_first_or_initialize" do
     subject(:user) { create(:user) }
 
     context "when profile does not exist" do
