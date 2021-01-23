@@ -34,5 +34,8 @@ module Salaries
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    # Use component previews
+    config.view_component.preview_paths << "#{Rails.root}/spec/components/previews"
   end
 end

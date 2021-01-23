@@ -1,0 +1,11 @@
+<%= content_tag(:dl, class: "divide-y divide-gray-200", data: @target ) do %>
+  <%= content_tag(:div, class: "py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4") do %>
+    <%= render(DescriptionTitleComponent.new(title: @title)) %>
+      <%= content_tag(:dd, class: "mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2") do %>
+        <%= render(DescriptionDetailComponent.new(controller: @controller, data_target: @detail_target, detail: @profile.graduation_year)) %>
+        <%= content_tag(:span, class: "ml-4flex-shrink-0") do %>
+          <%= render(CleanButtonComponent.new(text: @button_text, action: @button_action)) %>
+        <% end %>
+      <% end %>
+  <% end %>
+<% end %>
