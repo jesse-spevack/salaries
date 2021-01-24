@@ -1,4 +1,4 @@
-<%= content_tag(:tr) do %>
+<%= content_tag(:tr, data: { alert_target: "row", alert_id_value: @salary.id }) do %>
   <%= render(TableBoldDataComponent.new(text: number_to_currency(@salary.amount))) %>
   <%= render(TableDataComponent.new(text: @salary.start_date)) %>
   <%= render(TableDataComponent.new(text: @salary.end_date)) %>
@@ -11,5 +11,7 @@
   <% end %>
   <%= render(TableDataComponent.new(text: time_ago_in_words(@salary.updated_at))) %>
   <%= render(TableDataLinkComponent.new(text: "Edit", path: edit_salary_path(@salary))) %>
-  <%= render(TableDataLinkComponent.new(text: "Delete", path: salary_path(@salary), data: { method: :delete })) %>
+  <%= content_tag(:td, class: "px-6 py-4 whitespace-nowrap text-right text-sm font-medium") do %>
+    <%= button_tag("Delete", data: { action: "alert#show" }, class: "text-indigo-600 hover:text-indigo-900") %>
+  <% end %>
 <% end %>
