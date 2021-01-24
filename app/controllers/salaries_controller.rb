@@ -19,6 +19,7 @@ class SalariesController < ApplicationController
 
   # GET /salaries/1/edit
   def edit
+    render :new
   end
 
   # POST /salaries
@@ -56,7 +57,7 @@ class SalariesController < ApplicationController
   def destroy
     @salary.destroy
     respond_to do |format|
-      format.html { redirect_to salaries_url, notice: "Salary was successfully destroyed." }
+      format.html { redirect_to profile_path, notice: "Salary was successfully destroyed." }
       format.json { head :no_content }
     end
   end

@@ -10,6 +10,6 @@
     <% end %>
   <% end %>
   <%= render(TableDataComponent.new(text: time_ago_in_words(@salary.updated_at))) %>
-  <%= render(TableDataLinkComponent.new(text: "Edit", path: "#")) %>
-  <%= render(TableDataLinkComponent.new(text: "Delete", path: "#")) %>
+  <%= render(TableDataLinkComponent.new(text: "Edit", path: edit_salary_path(@salary))) %>
+  <%= render(TableDataLinkComponent.new(text: "Delete", path: salary_path(@salary), data: { method: :delete })) %>
 <% end %>

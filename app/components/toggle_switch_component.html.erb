@@ -1,0 +1,27 @@
+<%= content_tag(:div, class: "sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5") do %>
+  <%= content_tag(:span, class: "flex-grow flex flex-col", id: "toggleLabel") do %>
+    <%= content_tag(:span, @attribute.to_s.titleize, class: "block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2") %>
+  <% end %>
+
+  <%= button_tag(
+    type: "button",
+    class: "bg-gray-600 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
+    aria_pressed: "false",
+    data: {
+      action: "toggle#update",
+      toggle_target: "button"
+    },
+  ) do %>
+
+    <%= content_tag(:span, "Use setting", class: "sr-only") %>
+    <%= content_tag(
+      :span,
+      nil,
+      data: { toggle_target: "switch" },
+      aria_hidden: true,
+      class: "translate-x-0 inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200"
+    ) %>
+  <% end %>
+
+  <%= @form.check_box(@attribute, class: "hidden", data: { toggle_target: "checkbox" }) %>
+<% end %>
