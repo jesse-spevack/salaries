@@ -6,11 +6,9 @@ export default class extends Controller {
   static targets = [ "alert", "row" ]
   static values = {
     id: Number,
-    alertId: Number
+    alertId: Number,
+    path: String
   } 
-
-  initialize() {
-  }
 
   cancel() { 
     this.alertTarget.classList.add(this.hiddenClass)
@@ -32,7 +30,7 @@ export default class extends Controller {
 
     Rails.ajax({
       type: "delete",
-      url: `/salaries/${this.alertIdValue}`
+      url: `/${this.pathValue}/${this.alertIdValue}`
     })
   }
 
