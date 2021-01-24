@@ -14,7 +14,7 @@
     <main>
       <%= render partial: "users/profile" %>
       <%= content_tag(:div, class: "px-4 py-8 sm:px-0") do %>
-        <%= render partial: "salaries/index" %>
+        <%= render(SalariesComponent.new(salaries: @salaries)) %>
       <% end %>
     </main>
   <% end %>

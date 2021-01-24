@@ -5,9 +5,7 @@ RSpec.describe DescriptionDetailComponent, type: :component do
 
   let(:detail) { "detail" }
 
-  it "renders something useful" do
-    expect(
-      render_inline(description_detail_component).to_html
-    ).to eq("<span class=\"flex-grow\" data-controller-target=\"target\">detail</span>")
+  it "renders a beautiful description detail" do
+    expect(render_inline(description_detail_component).to_html).to eq("<span class=\"flex-grow\" data-controller-target=\"target\">detail</span>\n")
   end
 end
