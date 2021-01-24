@@ -15,26 +15,17 @@
   data-graduation-profile-id-value="<%= @profile.id %>"
 >
   <div class="my-5 border-t border-gray-200">
-    <dl data-graduation-target="show" 
-      class="divide-y divide-gray-200">
-      <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
-        <dt class="text-sm font-medium text-gray-500">
-          Graduation year
-        </dt>
-        <dd class="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-          <span data-graduation-target="graduationYearText" class="flex-grow">
-            <%= @profile.graduation_year  %>
-          </span>
-          <span class="ml-4flex-shrink-0">
-            <button data-action="graduation#showForm"
-              type="button" 
-              class="bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-              Update
-            </button>
-          </span>
-        </dd>
-      </div>
-    </dl>
+    <%= render(
+      TitleDetailButtonComponent.new(
+        button_action: "graduation#showForm",
+        button_text: "Update",
+        controller: "graduation",
+        title: "Graduation Year",
+        detail_target: "graduationYearText",
+        target: "show",
+        profile: @profile
+      )
+    ) %>
 
     <div data-graduation-target="form" class="hidden w-full max-w-xs my-5">
       <label id="listbox-label" class="block text-sm font-medium text-gray-500">

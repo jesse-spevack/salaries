@@ -1,26 +1,21 @@
-<div class="py-10">
-  <header>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h1 class="text-3xl font-bold leading-tight text-gray-900">
+<%= content_tag(:div, class: "py-10") do %>
+  <%= content_tag(:div, class: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8") do %>
+    <header>
+      <%= content_tag(:h1, class: "text-3xl font-bold leading-tight text-gray-900") do %>
         Profile
-      </h1>
-      <div class="pt-1.5">
-        <p class="text-sm font-medium text-gray-500">
+      <% end %>
+      <%= content_tag(:div, class: "pt-1.5") do %>
+        <%= content_tag(:p, class: "text-sm font-medium text-gray-500") do %>
           Your anonymous Turing Slack Id:
           <%= @current_user.display_slack_id %>
-          <%= render partial: "users/profile" %>
-        </p>
-      </div>
-    </div>
-  </header>
-  <main>
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-      <!-- Replace with your content -->
-      <div class="px-4 py-8 sm:px-0">
-        <%= render partial: "salaries/index" %>
-      </div>
-      <!-- /End replace -->
-    </div>
-  </main>
-</div>
-
+        <% end %>
+      <% end %>
+    </header>
+    <main>
+      <%= render partial: "users/profile" %>
+      <%= content_tag(:div, class: "px-4 py-8 sm:px-0") do %>
+        <%= render(SalariesComponent.new(salaries: @salaries)) %>
+      <% end %>
+    </main>
+  <% end %>
+<% end %>
