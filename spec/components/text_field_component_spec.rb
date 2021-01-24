@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe TextFieldComponent, type: :component do
-  subject(:text_field) { described_class.new(form: form, attribute: :attribute) } 
+  subject(:text_field) { described_class.new(form: form, attribute: :attribute) }
 
   let(:form) { double }
   let(:result) { render_inline(text_field) }
