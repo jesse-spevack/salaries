@@ -43,7 +43,7 @@ class SalariesController < ApplicationController
   def update
     respond_to do |format|
       if @salary.update(salary_params)
-        format.html { redirect_to @salary, notice: "Salary was successfully updated." }
+        format.html { redirect_to profile_path, notice: "Salary was successfully updated." }
         format.json { render :show, status: :ok, location: @salary }
       else
         format.html { render :edit }
