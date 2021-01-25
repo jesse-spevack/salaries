@@ -6,14 +6,13 @@ RSpec.describe TitleDetailButtonComponent, type: :component do
       button_text: button_text,
       button_action: "action",
       controller: "controller",
-      detail_target: detail,
-      profile: profile,
+      detail_target: "detail_target",
+      detail: detail,
       target: "target",
       title: title
     )
   end
 
-  let(:profile) { build(:profile) }
   let(:title) { "A great title" }
   let(:detail) { "Some interesting details" }
   let(:button_text) { "A call to action" }

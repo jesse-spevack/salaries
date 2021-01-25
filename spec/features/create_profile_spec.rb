@@ -8,7 +8,7 @@ RSpec.describe "Creating profile", type: :system do
 
     visit root_path
     click_link "slack-login"
-    click_on("Select Graduation Year")
+    click_on("Select Graduation year")
     page.find("li", text: "2017").click
 
     expect(current_path).to eq profile_path
