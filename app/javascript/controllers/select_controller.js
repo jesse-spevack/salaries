@@ -29,43 +29,52 @@ export default class extends Controller {
     "check",
     "form",
     "item",
-    "graduationYearText",
+    "buttonText",
     "list",
     "select",
+    "selectItem",
     "show",
+    "value"
   ]
 
   static values = { 
-    graduationYear: Number, 
-    profileId: Number 
+    attribute: String,
+    item: String, 
+    itemId: Number,
+    path: String 
   }
 
   initialize() {
     this.setChecks();
-    if(!this.graduationYearValue) {
+    if(!this.itemValue) {
       this.showForm();
     }
   }
 
-  selectGraduationYear() {
-    this.graduationYearValue = event.target.innerText
-    this.graduationYearTextTargets.forEach(function(target) {
-      target.innerText = event.target.innerText
-    }.bind(this))
+  choose(event) {
+    let newValue = event.target.innerText
+    let attribute = this.attributeValue
+    let path = this.pathValue
+    let params = { url: `/${path}`, type: "post" }
+
+    if (this.itemIdValue) {
+      params = { url: `/${path}/${this.itemIdValue}`, type: "patch" }
+    }
+
+    this.itemValue = newValue 
+    for (let item of this.itemTargets) {
+      item.innerText = newValue
+    }
+
     this.hideForm()
     this.setChecks()
 
-    var params = { url: "/profiles", type: "post" }
-    if (this.profileIdValue) {
-      params = { url: `/profiles/${this.profileIdValue}`, type: "patch" }
-    }
     Rails.ajax({
       type: params["type"],
       dataType: "json",
       url: params["url"],
-      data: `graduation_year=${event.target.innerText}`,
+      data: `${attribute}=${newValue}`,
     })
-
   }
 
   showForm() {
@@ -76,10 +85,6 @@ export default class extends Controller {
   hideForm() {
     this.showTarget.classList.remove(this.hiddenClass)
     this.formTarget.classList.add(this.hiddenClass)
-  }
-
-  handleFailure() {
-    console.log("something went wrong")
   }
 
   showList() {
@@ -105,12 +110,12 @@ export default class extends Controller {
   }
 
   setChecks() {
-    this.itemTargets.forEach(function(item){
-      if (item.innerText != this.graduationYearValue) {
-        item.lastElementChild.classList.add(this.hiddenClass)
+    for (let selectItem of this.selectItemTargets) {
+      if (selectItem.innerText.trim() != this.itemValue) {
+        selectItem.lastElementChild.classList.add(this.hiddenClass)
       } else {
-        item.lastElementChild.classList.remove(this.hiddenClass)
+        selectItem.lastElementChild.classList.remove(this.hiddenClass)
       }
-    }.bind(this))
+    }
   }
 }

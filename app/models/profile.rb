@@ -3,4 +3,5 @@ class Profile < ApplicationRecord
 
   belongs_to :user
   validates :graduation_year, inclusion: VALID_GRADUATION_YEARS
+
 end
