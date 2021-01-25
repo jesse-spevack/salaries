@@ -7,7 +7,7 @@ RSpec.describe SelectComponent, type: :component do
       item_id: 1,
       attribute: "attribute",
       path: "path",
-      collection: collection 
+      collection: collection
     )
   end
 
