@@ -1,14 +1,4 @@
-// Visit The Stimulus Handbook for more details 
-// https://stimulusjs.org/handbook/introduction
-// 
-// This example controller works with specially annotated HTML like:
-//
-// <div data-controller="hello">
-//   <h1 data-target="hello.output"></h1>
-// </div>
-
 import { Controller } from "stimulus"
-
 import Rails from "@rails/ujs";
 
 export default class extends Controller {
@@ -19,22 +9,16 @@ export default class extends Controller {
     "hidden",
     "highlighted",
     "notHighlighted",
-    "notSelectedItemFont",
-    "selectedItemFont",
     "show",
-    "unchecked",
+    "unchecked"
   ]
 
   static targets = [
-    "check",
     "form",
     "item",
-    "buttonText",
     "list",
-    "select",
     "selectItem",
-    "show",
-    "value"
+    "show"
   ]
 
   static values = { 
