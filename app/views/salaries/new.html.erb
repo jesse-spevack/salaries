@@ -1,3 +1,7 @@
+<% flash.each do |type, data| %>
+  <%= render NotificationComponent.new(type: type, data: data) %>
+<% end %>
+
 <%= form_with(model: @salary, class: "space-y-8 divide-y divide-transparent") do |form| %>
   <%= content_tag(:div, class: "space-y-8 divide-y divide-transparent sm:space-y-5") do %>
     <%= content_tag(:div) do %>
