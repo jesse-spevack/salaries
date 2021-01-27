@@ -35,7 +35,10 @@ class SalariesController < ApplicationController
         end
         format.json { render :show, status: :created, location: @salary }
       else
-        format.html { render :new }
+        format.html do
+          flash.now[:error] = {title: "Salary could not be created.", list: @salary.errors.map(&:full_message)}
+          render :new
+        end
         format.json { render json: @salary.errors, status: :unprocessable_entity }
       end
     end
@@ -52,7 +55,10 @@ class SalariesController < ApplicationController
         end
         format.json { render :show, status: :ok, location: @salary }
       else
-        format.html { render :edit }
+        format.html do
+          flash.now[:error] = {title: "Salary could not be updated.", list: @salary.errors.map(&:full_message)}
+          render :new
+        end
         format.json { render json: @salary.errors, status: :unprocessable_entity }
       end
     end

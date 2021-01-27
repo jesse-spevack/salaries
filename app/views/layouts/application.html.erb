@@ -13,6 +13,11 @@
 
   <body>
     <%= render "shared/nav" %> 
+    <%= content_tag(:div, class: "w-full absolute") do %>
+      <% flash.each do |type, data| %>
+        <%= render(NotificationComponent.new(type: type, data: data)) %>
+      <% end %>
+    <% end %>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <%= yield %>
     </div>

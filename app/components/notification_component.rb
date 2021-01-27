@@ -9,12 +9,17 @@ class NotificationComponent < ViewComponent::Base
     error: {
       name: "x-circle",
       color: "red"
+    },
+    notice: {
+      name: "information-circle",
+      color: "blue"
     }
   }
 
   def initialize(type:, data:)
-    @type = type
     @data = data
+    @title = data.with_indifferent_access[:title]
+    @list = data[:list]
     @icon_name = ICONS.dig(type.to_sym, :name)
     @color = ICONS.dig(type.to_sym, :color)
   end
