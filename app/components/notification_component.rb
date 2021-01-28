@@ -17,14 +17,26 @@ class NotificationComponent < ViewComponent::Base
   }
 
   def initialize(type:, data:)
-    @data = data
-    @title = data.with_indifferent_access[:title]
-    @list = data[:list]
-    @icon_name = ICONS.dig(type.to_sym, :name)
-    @color = ICONS.dig(type.to_sym, :color)
+    @data = prepare(data)
+    @type = type.to_sym
+    @title = @data[:title]
+    @list = @data[:list]
+    @icon_name = ICONS.dig(@type, :name)
+    @color = ICONS.dig(@type, :color)
   end
 
   def render?
-    @data.is_a?(Hash) && @icon_name && @color
+    @data.present? && @icon_name && @color
+  end
+
+  def prepare(data)
+    case data
+    when Hash
+      data.with_indifferent_access
+    when String
+      {title: data}
+    else
+      {}
+    end
   end
 end
