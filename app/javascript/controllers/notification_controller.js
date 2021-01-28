@@ -5,7 +5,7 @@ export default class extends Controller {
     this.element.classList.remove('hidden')
     setTimeout(() => {
       this.close()
-    }, 5500)
+    }, 7500)
   }
 
   close () {
