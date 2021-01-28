@@ -9,6 +9,9 @@
           class: "p-2 border border-gray-200 border-opacity-100 max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm rounded-md"
         )
       %>
+      <% if (@validations_enabled) %>
+        <%= content_tag(:div, nil, data: { validate_target: "errorText" }, class: "absolute text-sm text-red-700") %>
+      <% end %>
     <% end %>
   <% end %> 
 <% end %> 
