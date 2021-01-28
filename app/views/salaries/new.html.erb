@@ -1,11 +1,17 @@
-<%= form_with(model: @salary, class: "space-y-8 divide-y divide-transparent") do |form| %>
+<%= form_with(model: @salary, data: { controller: "validate" }, class: "space-y-8 divide-y divide-transparent") do |form| %>
   <%= content_tag(:div, class: "space-y-8 divide-y divide-transparent sm:space-y-5") do %>
     <%= content_tag(:div) do %>
       <%= render(FormHeaderComponent.new(title: "Salary", subtitle: "This information will be aggregated into the Turing Salaries Dataset.")) %>
     <% end %> 
 
     <%= content_tag(:div) do %>
-      <%= render(TextFieldComponent.new(form: form, placeholder: "75000", attribute: :amount)) %>
+      <%= render(TextFieldComponent.new(
+        form: form,
+        placeholder: "75000",
+        attribute: :amount,
+        validations_enabled: true,
+        data: { action: "keyup->validate#validateTextIsNumeric", validate_target: "input" })
+      ) %>
     <% end %> 
 
 
