@@ -11,12 +11,20 @@ export default class extends Controller {
 
     if (isEmpty || isNum) {
       this.errorTextTarget.innerText = ""
-      this.submitTarget.disabled = false 
-      this.submitTarget.classList.remove(this.disabledClass) 
+      this.enableForm()
     } else {
       this.errorTextTarget.innerText = "Numeric text only."
-      this.submitTarget.disabled = true 
-      this.submitTarget.classList.add(this.disabledClass) 
+      this.disableForm()
     }
+  }
+
+  enableForm() {
+    this.submitTarget.disabled = false 
+    this.submitTarget.classList.remove(this.disabledClass) 
+  }
+
+  disableForm() {
+    this.submitTarget.disabled = true 
+    this.submitTarget.classList.add(this.disabledClass) 
   }
 }
