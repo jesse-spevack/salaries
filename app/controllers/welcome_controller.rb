@@ -4,6 +4,6 @@ class WelcomeController < ApplicationController
   skip_before_action :require_login, only: [:index]
 
   def index
-    @current_user = current_user
+    redirect_to profile_path if logged_in?
   end
 end

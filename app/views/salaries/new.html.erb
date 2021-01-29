@@ -1,4 +1,4 @@
-<%= form_with(model: @salary, data: { controller: "validate" }, class: "space-y-8 divide-y divide-transparent") do |form| %>
+<%= form_with(model: @salary, data: { controller: "validate", validate_disabled_class: "opacity-50" }, class: "space-y-8 divide-y divide-transparent") do |form| %>
   <%= content_tag(:div, class: "space-y-8 divide-y divide-transparent sm:space-y-5") do %>
     <%= content_tag(:div) do %>
       <%= render(FormHeaderComponent.new(title: "Salary", subtitle: "This information will be aggregated into the Turing Salaries Dataset.")) %>
@@ -47,7 +47,7 @@
           class: "bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         )
       %>
-      <%= form.submit "Save", class: "ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+      <%= form.submit "Save", data: { validate_target: "submit" }, class: "ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
     <% end %> 
   <% end %> 
 <% end %> 
