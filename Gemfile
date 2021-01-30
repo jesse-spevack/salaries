@@ -26,9 +26,6 @@ gem "jbuilder", "~> 2.7"
 gem "omniauth"
 gem "omniauth-slack"
 
-# Secrets
-gem "figaro"
-
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
