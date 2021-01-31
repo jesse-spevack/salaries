@@ -26,3 +26,10 @@ application.load(definitionsFromContext(context))
 import Flatpickr from 'stimulus-flatpickr'
 require("flatpickr/dist/flatpickr.css")
 application.register("flatpickr", Flatpickr)
+
+window.initMap = function(...args) {
+  const event = document.createEvent("Events")
+  event.initEvent("google-maps-callback", true, true)
+  event.args = args
+  window.dispatchEvent(event)
+}
