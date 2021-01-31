@@ -38,6 +38,6 @@ RSpec.describe Salary, type: :model do
     subject { build(:salary) }
 
     it { should belong_to(:user) }
-    it { should belong_to(:location) }
+    it { should belong_to(:location).optional }
   end
 end
