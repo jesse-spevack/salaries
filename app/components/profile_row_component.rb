@@ -8,6 +8,5 @@ class ProfileRowComponent < ViewComponent::Base
     @path = path
     @collection = collection
     @title = attribute.humanize
-    @select_text = item || "Select #{@title}"
   end
 end

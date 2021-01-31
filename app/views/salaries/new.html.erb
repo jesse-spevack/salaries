@@ -14,15 +14,41 @@
       ) %>
     <% end %> 
 
-    <%= render(
-      SelectComponent.new(
-        item: @salary.location&.name,
-        item_id: @salary.location_id,
-        attribute: "City",
-        path: "locations",
-        collection: ["New York City", "Denver"]
-      )
-    ) %>
+    <%= content_tag(
+      :div,
+      tabindex: "1",
+      data: {
+        action: "foxusout->select#hideList",
+        controller: "select",
+        select_item_value: @item,
+        select_item_id_value: @item_id,
+        select_attribute_value: @attribute,
+        select_path_value: @path,
+        select_show_class: "opacity-100",
+        select_hide_class: "opacity-0",
+        select_highlighted_class: "text-white",
+        select_background_highlighted_class: "bg-indigo-600",
+        select_not_highlighted_class: "text-gray-900",
+        select_selected_item_font_class: "font-semibold",
+        select_not_selected_item_font_class: "font-normal",
+        select_checked_class: "text-white",
+        select_unchecked_class: "text-indigo-600",
+        select_hidden_class: "hidden"
+      }
+    ) do %>
+      <%= content_tag(:dl, class: "space-y-6 sm:space-y-5") do %>
+        <%= content_tag(:div, class: "sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5") do %>
+          <%= content_tag(:dt, "Location", class: "block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2") %>
+          <%= content_tag(:dd, class: "mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2") do %>
+            <%= content_tag(:span, class: "flex-grow") do %>
+              <%= content_tag(:div, class: "w-full max-w-xs") do %>
+                <%= render(SelectComponent.new(title: "location", select_text: @salary.location&.name, collection: ["Denver", "New York City"])) %>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %> 
 
     <%= content_tag(:div, 
       data: { 

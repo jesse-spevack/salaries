@@ -2,30 +2,21 @@
   :div,
   tabindex: "1",
   data: {
-    action: "focusout->select#hideList",
-    controller: "select",
-    select_item_value: @item,
-    select_item_id_value: @item_id,
-    select_attribute_value: @attribute,
-    select_path_value: @path,
-    select_show_class: "opacity-100",
-    select_hide_class: "opacity-0",
-    select_highlighted_class: "text-white",
-    select_background_highlighted_class: "bg-indigo-600",
-    select_not_highlighted_class: "text-gray-900",
-    select_selected_item_font_class: "font-semibold",
-    select_not_selected_item_font_class: "font-normal",
-    select_checked_class: "text-white",
-    select_unchecked_class: "text-indigo-600",
-    select_hidden_class: "hidden"
+    action: "select-event@window->profile-row#post",
+    controller: "profile-row",
+    profile_row_item_value: @item,
+    profile_row_item_id_value: @item_id,
+    profile_row_attribute_value: @attribute,
+    profile_row_path_value: @path,
+    profile_row_hidden_class: "hidden"
   }
 ) do %>
   <%= content_tag(:div, class: "my-5 border-t border-gray-200") do %>
     <%= render(
       TitleDetailButtonComponent.new(
-        button_action: "select#showForm",
+        button_action: "profile-row#toggleForm",
         button_text: "Update",
-        controller: "select",
+        controller: "profile-row",
         title: @title,
         detail_target: "item",
         target: "show",
@@ -33,70 +24,17 @@
       )
     ) %>
   <% end %>
-    <%= content_tag(:dl, class: "hidden my-5", data: { select_target: "form"}) do %>
+    <%= content_tag(:dl, class: "hidden my-5", data: { profile_row_target: "form"}) do %>
       <%= content_tag(:div, class: "sm:grid sm:grid-cols-3 sm:gap-4") do %>
         <%= content_tag(:dt, "Graduation year", class: "text-sm font-medium text-gray-500") %>
           <%= content_tag(:dd, class: "mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2") do %>
             <%= content_tag(:span, class: "flex-grow") do %>
               <%= content_tag(:div, class: "w-full max-w-xs") do %>
-                <%= content_tag(:div, class: "mt-1 relative col-span-1") do %>
-                  <%= button_tag(
-                    type: "button",
-                    aria_haspopup: "listbox",
-                    aria_expanded: true,
-                    aria_labelledby: "listbox-label",
-                    class: "bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
-                    data: {
-                      action: "select#showList",
-                      select_target: "select",
-                    }
-                  ) do %>
-                    <%= content_tag(:span, @select_text, data: { select_target: "item" }, class: "block truncate") %>
-                    <%= content_tag(:span, class: "absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none") do %>
-                      <%= inline_svg_tag(
-                        "icons/selector.svg",
-                        class: "h-5 w-5 text-gray-400",
-                        aria_hidden: true
-                      )%>
-                    <% end %>
-                  <% end %>
-                  <%= content_tag(:div, data: { select_target: "list" }, class: "opacity-0 absolute mt-1 w-full rounded-md bg-white shadow-lg") do %>
-                    <%= content_tag(:ul,
-                      tabindex: "-1",
-                      role: "listbox",
-                      aria_labelledby: "listbox-label",
-                      aria_activedescendant: "listbox-item-3",
-                      class: "max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
-                    ) do %>
-                      <% @collection.each do |value| %>
-                        <%= content_tag(:li,
-                          id: "listbox-option-0",
-                          role: "option",
-                          class: "text-gray-900 cursor-default select-none relative py-2 pl-3 pr-9",
-                          data: {
-                            action: "click->select#choose mouseenter->select#highlight mouseleave->select#unhighlight",
-                            select_target: "selectItem",
-                          }
-                        ) do %>
-
-                          <%= content_tag(:span, value, data: { select_target: "value" }, clas: "font-normal block truncate") %>
-
-                          <%= content_tag(:span, class: "text-indigo-600 absolute inset-y-0 right-0 flex items-center pr-4") do %>
-                            <%= inline_svg_tag(
-                              "icons/check.svg",
-                              class: "h-5 w-5",
-                              aria_hidden: true
-                            )%>
-                          <% end %>
-                        <% end %>
-                      <% end %>
-                    <% end %>
-                  <% end %>
-                <% end %>
+                <%= render(SelectComponent.new(title: @title, select_text: @item, collection: @collection)) %>
               <% end %>
             <% end %>
           <%= content_tag(:span, class: "ml-4flex-shrink-0") do %>
-            <%= render(CleanButtonComponent.new(text: "Cancel", action: "select#hideForm")) %>
+            <%= render(CleanButtonComponent.new(text: "Cancel", action: "profile-row#toggleForm")) %>
           <% end %>
       <% end %>
     <% end %>

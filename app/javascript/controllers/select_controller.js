@@ -14,11 +14,9 @@ export default class extends Controller {
   ]
 
   static targets = [
-    "form",
     "item",
     "list",
-    "selectItem",
-    "show"
+    "selectItem"
   ]
 
   static values = { 
@@ -28,51 +26,25 @@ export default class extends Controller {
     path: String 
   }
 
+  connect() {
+  }
+
   initialize() {
     this.setChecks();
-    if(!this.itemValue) {
-      this.showForm();
-    }
   }
 
   choose(event) {
-    let newValue = event.target.innerText
-    let attribute = this.attributeValue
-    let path = this.pathValue
-    let params = { url: `/${path}`, type: "post" }
-
-    if (this.itemIdValue) {
-      params = { url: `/${path}/${this.itemIdValue}`, type: "patch" }
-    }
+    const newValue = event.target.innerText
+    const detail = { selectValue: newValue }
+    const selectEvent = new CustomEvent("select-event", { detail: detail })
+    window.dispatchEvent(selectEvent)
 
     this.itemValue = newValue 
     for (let item of this.itemTargets) {
       item.innerText = newValue
     }
 
-    this.hideForm()
     this.setChecks()
-
-    Rails.ajax({
-      type: params["type"],
-      dataType: "json",
-      url: params["url"],
-      data: `${attribute}=${newValue}`,
-    })
-  }
-
-  // toggleForm() {
-  //   this.showTarget.classList
-  // }
-
-  showForm() {
-    this.showTarget.classList.add(this.hiddenClass)
-    this.formTarget.classList.remove(this.hiddenClass)
-  }
-
-  hideForm() {
-    this.showTarget.classList.remove(this.hiddenClass)
-    this.formTarget.classList.add(this.hiddenClass)
   }
 
   showList() {
@@ -90,7 +62,7 @@ export default class extends Controller {
     event.target.lastElementChild.classList.add(this.checkedClass)
   }
 
-  unhighlight(event) {
+  removeHighlight(event) {
     event.target.classList.remove(this.highlightedClass, this.backgroundHighlightedClass)
     event.target.classList.add(this.notHighlightedClass)
     event.target.lastElementChild.classList.remove(this.checkedClass)
