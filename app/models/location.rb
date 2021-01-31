@@ -3,6 +3,4 @@ class Location < ApplicationRecord
 
   validates :place_id, presence: true
   validates :name, presence: true
-
-
 end
