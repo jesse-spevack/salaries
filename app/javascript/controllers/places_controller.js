@@ -17,7 +17,7 @@ export default class extends Controller {
 
   initMap() {
     this.autocompleteService = new google.maps.places.AutocompleteService()
-    this.autocompleteService.getPlacePredictions({ input: "Den", types: ["(cities)"] }, this.logResult)
+    this.autocompleteService.getPlacePredictions({ input: "Amst", types: ["(cities)"] }, this.logResult)
     // this.autocomplete = new google.maps.places.Autocomplete(this.fieldTarget)
     // this.autocomplete.setTypes = "(Cities)"
   }
