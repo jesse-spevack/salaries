@@ -61,6 +61,10 @@ export default class extends Controller {
     })
   }
 
+  // toggleForm() {
+  //   this.showTarget.classList
+  // }
+
   showForm() {
     this.showTarget.classList.add(this.hiddenClass)
     this.formTarget.classList.remove(this.hiddenClass)

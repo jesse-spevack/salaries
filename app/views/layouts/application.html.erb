@@ -22,12 +22,5 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <%= yield %>
     </div>
-
-    <%= content_tag(:div, data: { controller: "places", action: "google-maps-callback@window->places#initMap" }) do %>
-      <%= content_tag(:h4) do %>
-        Cities
-      <% end %>
-      <%= content_tag(:input, nil, type: "search", data: { places_target: "field" }) %>
-    <% end %>
   </body>
 </html>

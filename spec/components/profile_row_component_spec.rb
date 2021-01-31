@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe SelectComponent, type: :component do
+RSpec.describe ProfileRowComponent, type: :component do
   subject(:select) do
     described_class.new(
       item: "item",
@@ -15,7 +15,7 @@ RSpec.describe SelectComponent, type: :component do
   let(:result) { render_inline(select) }
 
   it "renders a beautiful select component" do
-    expect(result.css("button").count).to eq 2
+    expect(result.css("button").count).to eq 3
     expect(result.css("li").count).to eq collection.count
   end
 end

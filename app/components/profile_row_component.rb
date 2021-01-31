@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class SelectComponent < ViewComponent::Base
+class ProfileRowComponent < ViewComponent::Base
   def initialize(item:, item_id:, attribute:, path:, collection:)
     @item = item
     @item_id = item_id

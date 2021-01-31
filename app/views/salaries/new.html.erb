@@ -14,6 +14,16 @@
       ) %>
     <% end %> 
 
+    <%= render(
+      SelectComponent.new(
+        item: @salary.location&.name,
+        item_id: @salary.location_id,
+        attribute: "City",
+        path: "locations",
+        collection: ["New York City", "Denver"]
+      )
+    ) %>
+
     <%= content_tag(:div, 
       data: { 
         controller: "toggle",
