@@ -37,13 +37,13 @@ This project proudly uses:
 Follow the steps below to setup salaries locally
 
 ### System Requirements
-- Ruby 2.7.2
+- Ruby 3.0.0
   ```bash
   # assuming you already have homebrew installed
   $ brew update && brew upgrade ruby-build
-  $ rbenv install 2.7.2
-  $ rbenv local 2.7.2 # set the Ruby version for the current directory
-  $ ruby -v # double check that the Ruby version was successfully changed to 2.7.2
+  $ rbenv install 3.0.0
+  $ rbenv local 3.0.0 # set the Ruby version for the current directory
+  $ ruby -v # double check that the Ruby version was successfully changed to 3.0.0
   ```
 - Rails 6.1.0
 - PostgreSQL
@@ -59,7 +59,7 @@ _Rails and other gem dependencies will be automatically installed by Bundler._
 ```bash
 $ git clone https://github.com/jesse-spevack/salaries.git
 $ cd salaries
-$ gem install bundler # if working with ruby version below 2.7.1
+$ gem install bundler # if working with ruby version below 3.0.0
 $ bundle install
 $ rails db:{create,migrate} # configure dev and test databases
 $ yarn
