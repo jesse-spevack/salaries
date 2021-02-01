@@ -1,30 +1,23 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static classes = [
-  ]
-
-  static targets = [ "field" ]
-
-  static values = { 
-  }
-
-  connect() {
-    if (typeof(google) != "undefined") {
-      this.initMap()
+  getList (event) {
+    const searchString = event.target.value
+    if (searchString !== "") {
+      this.autocompleteService = new google.maps.places.AutocompleteService()
+      this.autocompleteService.getPlacePredictions({ input: searchString, types: ["(cities)"] }, this.publish)
     }
   }
 
-  initMap() {
-    this.autocompleteService = new google.maps.places.AutocompleteService()
-    this.autocompleteService.getPlacePredictions({ input: "Amst", types: ["(cities)"] }, this.logResult)
-    // this.autocomplete = new google.maps.places.Autocomplete(this.fieldTarget)
-    // this.autocomplete.setTypes = "(Cities)"
-  }
+  publish (predictions) { 
+    const details = []
+    for (const prediction of predictions) {
+      const description = prediction.description
+      const placeId = prediction.place_id
+      details.push({ description: description, placeId: placeId })
+    }
 
-  logResult(res) {
-    console.log(res)
+    const event = new CustomEvent("place-event", { detail: details })
+    window.dispatchEvent(event)
   }
 }
-
-

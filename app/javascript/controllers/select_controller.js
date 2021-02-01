@@ -49,10 +49,12 @@ export default class extends Controller {
 
   showList() {
     this.listTarget.classList.replace(this.hideClass, this.showClass)
+    this.listTarget.classList.add("z-10")
   }
 
   hideList() {
     this.listTarget.classList.replace(this.showClass, this.hideClass)
+    this.listTarget.classList.remove("z-10")
   }
 
   highlight(event) {

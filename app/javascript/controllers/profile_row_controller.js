@@ -19,6 +19,12 @@ export default class extends Controller {
     path: String 
   }
 
+  connect () {
+    if(this.itemTarget.innerText === "") {
+      this.toggleForm()
+    }
+  }
+
   post(event) {
     let newValue = event.detail.selectValue 
     let attribute = this.attributeValue
