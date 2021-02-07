@@ -5,7 +5,7 @@ RSpec.describe "Creating profile", type: :system do
 
   scenario "takes place on user profile page" do
     user = mock_auth_hash
-    future_year = "#{Date.today.year + 1}"
+    future_year = (Date.today.year + 1).to_s
 
     visit root_path
     click_link "slack-login"
