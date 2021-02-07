@@ -1,7 +1,14 @@
 import { Controller } from "stimulus"
-import Rails from "@rails/ujs";
 
 export default class extends Controller {
+  static targets = [ 
+    "list",
+    "input",
+    "placeId",
+    "selectItem",
+    "value"
+  ]
+
   static classes = [
     "backgroundHighlighted",
     "checked",
@@ -13,48 +20,49 @@ export default class extends Controller {
     "unchecked"
   ]
 
-  static targets = [
-    "item",
-    "list",
-    "selectItem"
-  ]
-
   static values = { 
     attribute: String,
     item: String, 
     itemId: Number,
     path: String,
+    placeId: String,
     selectItemIndex: Number
   }
 
-  initialize() {
-    this.setChecks();
-  }
+  populateList (event) {
+    const places = event.detail
+    const ul = this.listTarget.firstElementChild
+    const li = ul.firstElementChild
 
-  choose(event) {
-    const newValue = event.target.innerText
-    const detail = { selectValue: newValue }
-    const selectEvent = new CustomEvent("select-event", { detail: detail })
-    window.dispatchEvent(selectEvent)
+    while(ul.firstChild) {
+      ul.removeChild(ul.lastChild)
+    }
 
-    this.itemValue = newValue 
-    this.itemTarget.innerText = newValue
+    for (const place of places)  {
+      let newLi = li.cloneNode(true)
+      newLi.firstElementChild.innerText = place.description
+      newLi.id = place.placeId
+      newLi.classList.remove("bg-indigo-600", "text-white")
+      newLi.lastElementChild.classList.add("hidden")
+      ul.appendChild(newLi)
+    }
 
-    this.setChecks()
+    this.showList()
   }
 
   showList() {
-    console.log("show list")
     if (this.listTarget.innerText !== "") {
       this.listTarget.classList.replace(this.hideClass, this.showClass)
       this.listTarget.classList.add("z-10")
+      this.listTarget.classList.remove("hidden")
     }
   }
 
-  hideList() {
-    console.log("hide list")
+  hideList(event) {
+    console.log("hiding")
     this.listTarget.classList.replace(this.showClass, this.hideClass)
     this.listTarget.classList.remove("z-10")
+    this.listTarget.classList.add("hidden")
   }
 
   highlight(event) {
@@ -79,5 +87,22 @@ export default class extends Controller {
         selectItem.lastElementChild.classList.remove(this.hiddenClass)
       }
     }
+  }
+
+  choose (event) {
+    const newValue = event.target.innerText
+    const placeId = event.target.id
+
+    this.itemValue = newValue 
+    this.placeIdValue = placeId 
+    this.inputTarget.value = newValue
+
+    this.setChecks()
+    this.hideList()
+  }
+
+  placeIdValueChanged() {
+    this.placeIdTarget.value = this.placeIdValue
+    console.log("place id changed")
   }
 }

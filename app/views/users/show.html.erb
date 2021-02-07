@@ -13,7 +13,7 @@
       <% end %>
     </header>
     <main>
-      <%= render partial: "users/profile" %>
+      <%= render(ProfileComponent.new(profile: @profile)) %>
       <%= content_tag(:div, class: "px-4 py-8 sm:px-0") do %>
         <%= render(SalariesComponent.new(salaries: @salaries)) %>
       <% end %>
