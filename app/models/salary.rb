@@ -14,7 +14,7 @@ class Salary < ApplicationRecord
   validate :end_date_must_be_blank_if_current_salary
 
   def location_attributes=(location_attributes)
-    self.location = Location.find_or_create_by(location_attributes)
+    self.location = Location.from_attributes(location_attributes)
   end
 
   private
