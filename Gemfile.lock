@@ -308,7 +308,6 @@ DEPENDENCIES
   bootsnap (>= 1.4.4)
   capybara (>= 3.34)
   factory_bot_rails
-  faraday
   inline_svg
   jbuilder (~> 2.7)
   listen (~> 3.3)
