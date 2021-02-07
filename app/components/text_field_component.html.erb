@@ -1,16 +1,30 @@
 <%= content_tag(:div, class: "space-y-6 sm:space-y-5") do %>
   <%= content_tag(:div, class: "sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5") do %>
     <%= @form.label @attribute, class: "block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2" %>
-    <%= content_tag(:div, class: "mt-1 sm:mt-0 sm:col-span-2") do %>
-      <%= @form.text_field(
-          @attribute,
-          placeholder: @placeholder,
-          data: @data,
-          class: "p-2 border border-gray-200 border-opacity-100 max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm rounded-md"
-        )
-      %>
-      <% if (@validations_enabled) %>
-        <%= content_tag(:div, nil, data: { validate_target: "errorText" }, class: "absolute text-sm text-red-700") %>
+    <%= content_tag(:div, class: "mt-1 relative col-span-1") do %>
+      <%= content_tag(:span, class: "flex-grow") do %>
+        <%= content_tag(:div, class: "w-full max-w-xs") do %>
+          <%= content_tag(:div, class: "mt-1 relative col-span-1") do %>
+            <%= @form.text_field(
+                @attribute,
+                data: @data,
+                class: "mr-0 bg-white relative p-2 border border-gray-300 border-opacity-100 max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm rounded-md"
+              )
+            %>
+            <% if (@icon) %>
+              <%= content_tag(:span, class: "absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none") do %>
+                <%= inline_svg_tag(
+                  "icons/#{@icon}.svg",
+                  class: "h-5 w-5 text-gray-400",
+                  aria_hidden: true
+                )%>
+              <% end %>
+            <% end %>
+            <% if (@validations_enabled) %>
+              <%= content_tag(:div, nil, data: { validate_target: "errorText" }, class: "absolute text-sm text-red-700") %>
+            <% end %>
+          <% end %>
+        <% end %>
       <% end %>
     <% end %>
   <% end %> 

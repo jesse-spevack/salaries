@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
 class SearchListComponent < ViewComponent::Base
-  def initialize(title:, select_text:, collection:)
+  def initialize(form:, title:, item:, collection:)
     @collection = collection
-    @select_text = select_text || "Select #{title.humanize}"
+    @form = form
+    @item = item
+    @title = title
   end
 end

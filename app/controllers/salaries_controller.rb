@@ -1,5 +1,6 @@
 class SalariesController < ApplicationController
   before_action :set_salary, only: [:show, :edit, :update, :destroy]
+  before_action :set_location, only: [:show, :edit, :update, :destroy]
 
   # GET /salaries
   # GET /salaries.json
@@ -81,8 +82,12 @@ class SalariesController < ApplicationController
     @salary = Salary.find(params[:id])
   end
 
+  def set_location
+    @salary.location ||= Location.new
+  end
+
   # Only allow a list of trusted parameters through.
   def salary_params
-    params.require(:salary).permit(:amount, :start_date, :end_date, :current_salary).merge(user: current_user)
+    params.require(:salary).permit(:amount, :start_date, :end_date, :current_salary, location_attributes: [:name, :place_id]).merge(user: current_user)
   end
 end

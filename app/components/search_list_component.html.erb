@@ -2,32 +2,34 @@
   :div,
   tabindex: "1",
   data: {
-    controller: "select places search-list",
-    action: "focusout->select#hideList place-event@window->search-list#populateList",
-    select_show_class: "opacity-100",
-    select_hide_class: "opacity-0",
-    select_highlighted_class: "text-white",
-    select_background_highlighted_class: "bg-indigo-600",
-    select_not_highlighted_class: "text-gray-900",
-    select_selected_item_font_class: "font-semibold",
-    select_not_selected_item_font_class: "font-normal",
-    select_checked_class: "text-white",
-    select_unchecked_class: "text-indigo-600",
-    select_hidden_class: "hidden"
+    controller: "places search-list",
+    action: "focusout->search-list#hideList click->search-list#showList place-event@window->search-list#populateList",
+    search_list_show_class: "opacity-100",
+    search_list_hide_class: "opacity-0",
+    search_list_highlighted_class: "text-white",
+    search_list_background_highlighted_class: "bg-indigo-600",
+    search_list_not_highlighted_class: "text-gray-900",
+    search_list_selected_item_font_class: "font-semibold",
+    search_list_not_selected_item_font_class: "font-normal",
+    search_list_checked_class: "text-white",
+    search_list_unchecked_class: "text-indigo-600",
+    search_list_hidden_class: "hidden",
+    search_list_select_item_index_value: -1,
+    search_list_select_item_value: "",
+    search_list_place_id_value: @item.place_id
   }
 ) do %>
   <%= content_tag(:div, class: "mt-1 relative col-span-1") do %>
-    <%= content_tag(
-      :input,
-      nil,
-      type: "text",
+    <%= @form.text_field(
+      "name",
+      autocomplete: "off",
       aria_haspopup: "listbox",
       aria_expanded: true,
       aria_labelledby: "listbox-label",
       class: "bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
       data: {
-        action: "focus->select#showList keyup->select#showList keyup->places#getList",
-        select_target: "select",
+        action: "keyup->places#getList",
+        search_list_target: "input",
       }
     ) %>
     <%= content_tag(:span, class: "absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none") do %>
@@ -37,7 +39,7 @@
         aria_hidden: true
       )%>
     <% end %>
-    <%= content_tag(:div, data: { select_target: "list", search_list_target: "list" }, class: "z-10 opacity-0 absolute mt-1 w-full rounded-md bg-white shadow-lg") do %>
+    <%= content_tag(:div, data: { search_list_target: "list" }, class: "opacity-0 absolute mt-1 w-full rounded-md bg-white shadow-lg") do %>
       <%= content_tag(:ul,
         tabindex: "-1",
         role: "listbox",
@@ -47,16 +49,15 @@
       ) do %>
         <% @collection.each do |value| %>
           <%= content_tag(:li,
-            id: "listbox-option-0",
             role: "option",
             class: "text-gray-900 cursor-default select-none relative py-2 pl-3 pr-9",
             data: {
-              action: "click->select#choose mouseenter->select#highlight mouseleave->select#removeHighlight",
-              select_target: "selectItem",
+              action: "mousedown->search-list#choose mouseenter->search-list#highlight mouseleave->search-list#removeHighlight",
+              search_list_target: "selectItem",
             }
           ) do %>
 
-            <%= content_tag(:span, value, data: { select_target: "value" }, clas: "font-normal block truncate") %>
+            <%= content_tag(:span, value, data: { seach_list_target: "value" }, clas: "font-normal block truncate") %>
 
             <%= content_tag(:span, class: "text-indigo-600 absolute inset-y-0 right-0 flex items-center pr-4") do %>
               <%= inline_svg_tag(
@@ -70,4 +71,5 @@
       <% end %>
     <% end %>
   <% end %>
+  <%= @form.hidden_field(:place_id, data: { search_list_target: "placeId" }) %>
 <% end %>

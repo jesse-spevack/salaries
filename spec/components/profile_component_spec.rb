@@ -1,13 +1,11 @@
 require "rails_helper"
 
 RSpec.describe ProfileComponent, type: :component do
-  pending "add some examples to (or delete) #{__FILE__}"
+  subject(:profile) { described_class.new(profile: create(:profile)) }
 
-  # it "renders something useful" do
-  #   expect(
-  #     render_inline(described_class.new(attr: "value")) { "Hello, components!" }.css("p").to_html
-  #   ).to include(
-  #     "Hello, components!"
-  #   )
-  # end
+  let(:result) { render_inline(profile) }
+
+  it "renders a beautiful profile row component" do
+    expect(result.css("dt").to_html).to include "Graduation year"
+  end
 end
