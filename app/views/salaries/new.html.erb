@@ -23,7 +23,7 @@
             <%= content_tag(:span, class: "flex-grow") do %>
               <%= content_tag(:div, class: "w-full max-w-xs") do %>
                 <%= render(SearchListComponent.new(form: location, title: "name", item: @salary.location, collection: [""])) %>
-                <%= content_tag(:p, "Blank locations are considered remote.", class: "mt-2 text-sm text-gray-500") %>
+                <%= content_tag(:p, "Leave blank for remote.", class: "mt-2 text-sm text-gray-500") %>
               <% end %>
             <% end %>
           <% end %>
