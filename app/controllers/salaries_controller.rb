@@ -15,7 +15,7 @@ class SalariesController < ApplicationController
 
   # GET /salaries/new
   def new
-    @salary = Salary.new
+    @salary = Salary.new(location: Location.new)
   end
 
   # GET /salaries/1/edit

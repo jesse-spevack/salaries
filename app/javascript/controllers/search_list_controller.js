@@ -79,23 +79,6 @@ export default class extends Controller {
     event.target.lastElementChild.classList.add(this.uncheckedClass)
   }
 
-  scroll (event) {
-    console.log("scroll")
-  //   const isUpArrow = event.keyCode === 38
-  //   const isDownArrow = event.keyCode === 40
-  //   let arrowKeyEvent
-
-  //   if (isUpArrow) {
-  //     arrowKeyEvent = new CustomEvent("up-arrow-event")
-  //   } else if (isDownArrow) {
-  //     arrowKeyEvent = new CustomEvent("down-arrow-event")
-  //   }
-
-  //   if (arrowKeyEvent) {
-  //     window.dispatchEvent(arrowKeyEvent)
-  //   }
-  }
-
   setChecks() {
     for (let selectItem of this.selectItemTargets) {
       if (selectItem.innerText.trim() != this.itemValue) {
@@ -107,20 +90,12 @@ export default class extends Controller {
   }
 
   choose (event) {
-    console.log('choose', event)
-    // this.inputTarget.value = event.target.innerText
     const newValue = event.target.innerText
     const placeId = event.target.id
-    // const detail = { selectValue: newValue }
-    // const selectEvent = new CustomEvent("select-event", { detail: detail })
-    // window.dispatchEvent(selectEvent)
 
     this.itemValue = newValue 
     this.placeIdValue = placeId 
     this.inputTarget.value = newValue
-    // for (let item of this.itemTargets) {
-    //   item.innerText = newValue
-    // }
 
     this.setChecks()
     this.hideList()
