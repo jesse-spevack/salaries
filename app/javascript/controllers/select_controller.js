@@ -17,7 +17,6 @@ export default class extends Controller {
   }
 
   setSelected(event) {
-    console.log("select item changed")
     const selectedValue = event.detail.value
     this.itemValue = selectedValue 
     this.itemTarget.innerText = selectedValue
@@ -28,13 +27,11 @@ export default class extends Controller {
   }
 
   showList() {
-    console.log("showing list")
     this.listTarget.classList.remove(this.hiddenClass)
     this.listTarget.classList.add(this.zClass)
   }
 
   hideList() {
-    console.log("hiding list")
     this.listTarget.classList.add(this.hiddenClass)
     this.listTarget.classList.remove(this.zClass)
   }
