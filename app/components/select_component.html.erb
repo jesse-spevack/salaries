@@ -3,17 +3,10 @@
   tabindex: "1",
   data: {
     controller: "select",
-    action: "focusout->select#hideList",
-    select_show_class: "opacity-100",
-    select_hide_class: "opacity-0",
-    select_highlighted_class: "text-white",
-    select_background_highlighted_class: "bg-indigo-600",
-    select_not_highlighted_class: "text-gray-900",
-    select_selected_item_font_class: "font-semibold",
-    select_not_selected_item_font_class: "font-normal",
-    select_checked_class: "text-white",
-    select_unchecked_class: "text-indigo-600",
-    select_hidden_class: "hidden"
+    action: "focusout->select#hideList list-item-selected-event@window->select#setSelected",
+    select_z_class: "z-10",
+    select_hidden_class: "opacity-0",
+    select_item_value: @select_text
   }
 ) do %>
   <%= content_tag(:div, class: "mt-1 relative col-span-1") do %>
@@ -23,10 +16,7 @@
       aria_expanded: true,
       aria_labelledby: "listbox-label",
       class: "bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
-      data: {
-        action: "select#showList",
-        select_target: "select",
-      }
+      data: { action: "select#showList" }
     ) do %>
       <%= content_tag(:span, @select_text, data: { select_target: "item" }, class: "block truncate") %>
       <%= content_tag(:span, class: "absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none") do %>
@@ -37,7 +27,7 @@
         )%>
       <% end %>
     <% end %>
-    <%= content_tag(:div, data: { select_target: "list" }, class: "z-10 opacity-0 absolute mt-1 w-full rounded-md bg-white shadow-lg") do %>
+    <%= content_tag(:div, data: { select_target: "list" }, class: "opacity-0 absolute mt-1 w-full rounded-md bg-white shadow-lg") do %>
       <%= content_tag(:ul,
         tabindex: "-1",
         role: "listbox",
@@ -46,26 +36,7 @@
         class: "max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
       ) do %>
         <% @collection.each do |value| %>
-          <%= content_tag(:li,
-            id: "listbox-option-0",
-            role: "option",
-            class: "text-gray-900 cursor-default select-none relative py-2 pl-3 pr-9",
-            data: {
-              action: "click->select#choose mouseenter->select#highlight mouseleave->select#removeHighlight",
-              select_target: "selectItem",
-            }
-          ) do %>
-
-            <%= content_tag(:span, value, data: { select_target: "value" }, clas: "font-normal block truncate") %>
-
-            <%= content_tag(:span, class: "text-indigo-600 absolute inset-y-0 right-0 flex items-center pr-4") do %>
-              <%= inline_svg_tag(
-                "icons/check.svg",
-                class: "h-5 w-5",
-                aria_hidden: true
-              )%>
-            <% end %>
-          <% end %>
+          <%= render(SelectListItemComponent.new(value: value, selected: value == @select_text)) %>
         <% end %>
       <% end %>
     <% end %>

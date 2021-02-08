@@ -25,28 +25,38 @@ export default class extends Controller {
     }
   }
 
-  post(event) {
-    let newValue = event.detail.selectValue 
-    let attribute = this.attributeValue
-    let path = this.pathValue
+  update(event) {
+    console.log("updating")
+    const selectedValue = event.detail.value
+
+    if(event.detail.value !== this.itemValue) {
+      this.itemValue = selectedValue
+      this.itemTarget.innerText = selectedValue
+      this.toggleForm()
+      this.post()
+    }
+  }
+
+  post() {
+    const value = this.itemValue
+    const attribute = this.attributeValue
+    const path = this.pathValue
     let params = { url: `/${path}`, type: "post" }
 
     if (this.itemIdValue) {
       params = { url: `/${path}/${this.itemIdValue}`, type: "patch" }
     }
 
-    this.itemTarget.innerText = newValue 
-    this.toggleForm()
-
     Rails.ajax({
       type: params["type"],
       dataType: "json",
       url: params["url"],
-      data: `${attribute}=${newValue}`,
+      data: `${attribute}=${value}`,
     })
   }
 
   toggleForm() {
+    console.log("toggling form")
     this.showTarget.classList.toggle(this.hiddenClass)
     this.formTarget.classList.toggle(this.hiddenClass)
   }
