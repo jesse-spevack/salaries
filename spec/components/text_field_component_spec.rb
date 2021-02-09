@@ -10,6 +10,6 @@ RSpec.describe TextFieldComponent, type: :component do
   before { allow(form).to receive(:label) }
 
   it "renders a beautiful text field component" do
-    expect(result.css("div").count).to eq 3
+    expect(result.css("div").count).to eq 5
   end
 end

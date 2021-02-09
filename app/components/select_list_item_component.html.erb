@@ -1,0 +1,40 @@
+<%= content_tag(
+  :div,
+  data: {
+    controller: "select-list-item",
+    select_list_item_is_selected_value: @selected,
+    select_list_item_list_item_value: @value,
+    select_list_item_white_class: "text-white",
+    select_list_item_highlighted_font_class: "font-semibold",
+    select_list_item_highlighted_background_class: "bg-indigo-600",
+    select_list_item_checked_class: "text-indigo-600",
+    select_list_item_text_class: "text-gray-900",
+    select_list_item_font_class: "font-normal",
+    select_list_item_hidden_class: "hidden",
+  }
+) do %>
+  <%= content_tag(:li,
+    id: "listbox-option-0",
+    role: "option",
+    class: "text-gray-900 cursor-default select-none relative py-2 pl-3 pr-9",
+    data: {
+      action: "list-item-selected-event@window->select-list-item#deselect click->select-list-item#select mouseenter->select-list-item#highlight mouseleave->select-list-item#removeHighlight",
+      select_list_item_target: "listItem",
+    }
+  ) do %>
+
+    <%= content_tag(:span, @value, data: { select_list_item_target: "listItemValue" }, clas: "font-normal block truncate") %>
+
+    <%= content_tag(
+      :span,
+      data: { select_list_item_target: "check"},
+      class: "text-indigo-600 absolute inset-y-0 right-0 flex items-center pr-4"
+    ) do %>
+      <%= inline_svg_tag(
+        "icons/check.svg",
+        class: "h-5 w-5",
+        aria_hidden: true
+      )%>
+    <% end %>
+  <% end %>
+<% end %>
