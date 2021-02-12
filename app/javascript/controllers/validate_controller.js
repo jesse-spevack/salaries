@@ -2,7 +2,7 @@ import { Controller } from "stimulus"
 
 export default class extends Controller {
   static classes = [ "alert", "disabled" ]
-  static targets = [ "errorText", "input", "submit" ]
+  static targets = [ "errorText", "input", "submit", "searchListErrorText" ]
 
   validateTextIsNumeric() {
     let value = event.target.value
@@ -16,6 +16,16 @@ export default class extends Controller {
       this.errorTextTarget.innerText = "Numeric text only."
       this.disableForm()
     }
+  }
+
+  validSearchList() {
+    this.searchListErrorTextTarget.innerText = ""
+    this.enableForm()
+  }
+
+  invalidSearchList() {
+    this.searchListErrorTextTarget.innerText = "Select a location from dropdown list"
+    this.disableForm()
   }
 
   enableForm() {
