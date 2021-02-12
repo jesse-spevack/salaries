@@ -26,7 +26,6 @@ export default class extends Controller {
   }
 
   update(event) {
-    console.log("updating")
     const selectedValue = event.detail.value
 
     if(event.detail.value !== this.itemValue) {
@@ -56,7 +55,6 @@ export default class extends Controller {
   }
 
   toggleForm() {
-    console.log("toggling form")
     this.showTarget.classList.toggle(this.hiddenClass)
     this.formTarget.classList.toggle(this.hiddenClass)
   }
