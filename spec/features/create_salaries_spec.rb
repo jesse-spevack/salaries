@@ -38,4 +38,21 @@ RSpec.describe "Creating salaries", type: :feature do
     expect(page).to have_content("$80,000.00")
     expect(user.salaries.first.amount).to eq amount
   end
+
+  scenario "when location is changed to remote" do
+    user = mock_auth_hash
+    location = create(:remote_location)
+    create(:salary, user: user, location: location)
+
+    visit root_path
+    click_link "slack-login"
+
+    click_link "Edit"
+    find("#salary_location_attributes_name").set("")
+    click_on "Save"
+
+    expect(current_path).to eq profile_path
+    expect(page).to have_content("$80,000.00")
+    expect(location.name).to eq "remote"
+  end
 end
