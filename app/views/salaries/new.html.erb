@@ -1,4 +1,12 @@
-<%= form_with(model: @salary, data: { controller: "validate", validate_disabled_class: "opacity-50" }, class: "space-y-8 divide-y divide-transparent") do |form| %>
+<%= form_with(
+  model: @salary,
+  data: { 
+    controller: "validate",
+    validate_disabled_class: "opacity-50",
+    action: "search-list-invalid-entry-detected-event@window->validate#invalidSearchList search-list-valid-entry-detected-event@window->validate#validSearchList"
+  },
+  class: "space-y-8 divide-y divide-transparent"
+) do |form| %>
   <%= content_tag(:div, class: "space-y-8 divide-y divide-transparent sm:space-y-5") do %>
     <%= content_tag(:div) do %>
       <%= render(FormHeaderComponent.new(title: "Salary", subtitle: "This information will be aggregated into the Turing Salaries Dataset.")) %>
@@ -18,12 +26,12 @@
     <%= form.fields_for :location do |location| %>
       <%= content_tag(:dl, class: "space-y-6 sm:space-y-5") do %>
         <%= content_tag(:div, class: "sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5") do %>
-          <%= location.label "location", class: "block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2" %>
+          <%= location.label "city", class: "block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2" %>
           <%= content_tag(:div, class: "mt-1 relative col-span-1") do %>
             <%= content_tag(:span, class: "flex-grow") do %>
               <%= content_tag(:div, class: "w-full max-w-xs") do %>
                 <%= render(SearchListComponent.new(form: location, title: "name", item: @salary.location, collection: [""])) %>
-                <%= content_tag(:p, "Leave blank for remote.", class: "mt-2 text-sm text-gray-500") %>
+                <%= content_tag(:p, "", data: { validate_target: "searchListErrorText" }, class: "mt-2 text-sm text-red-700") %>
               <% end %>
             <% end %>
           <% end %>
