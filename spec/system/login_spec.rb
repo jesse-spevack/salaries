@@ -1,6 +1,8 @@
 require "rails_helper"
 
-RSpec.describe "Logging in with slack", type: :feature do
+RSpec.describe "Logging in with slack", type: :system do
+  before { driven_by(:selenium_chrome_headless) }
+
   let(:slack_id) { "raw_slack_id_12345" }
   let(:hashed_id) { Digest::SHA256.hexdigest(slack_id) }
   let!(:user) { create(:user, slack_id: hashed_id) }

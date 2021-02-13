@@ -1,13 +1,19 @@
 require "rails_helper"
 
 RSpec.describe SearchListComponent, type: :component do
-  pending "add some examples to (or delete) #{__FILE__}"
+  subject(:search_list_component) { described_class.new(form: form, item: item, title: title, collection: collection) }
 
-  # it "renders something useful" do
-  #   expect(
-  #     render_inline(described_class.new(attr: "value")) { "Hello, components!" }.css("p").to_html
-  #   ).to include(
-  #     "Hello, components!"
-  #   )
-  # end
+  let(:collection) { [] }
+  let(:form) { double() }
+  let(:item) { Location.new }
+  let(:title) { "my title" }
+
+  before do
+    allow(form).to receive(:text_field)
+    allow(form).to receive(:hidden_field)
+  end
+
+  it "renders a beautiful search list component" do
+    expect(render_inline(search_list_component).css(:ul).count).to eq 1
+  end
 end

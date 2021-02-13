@@ -27,7 +27,6 @@ class SalariesController < ApplicationController
   # POST /salaries.json
   def create
     @salary = Salary.new(salary_params)
-
     respond_to do |format|
       if @salary.save
         format.html do

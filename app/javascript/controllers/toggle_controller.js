@@ -1,44 +1,43 @@
-// Visit The Stimulus Handbook for more details 
-// https://stimulusjs.org/handbook/introduction
-// 
-// This example controller works with specially annotated HTML like:
-//
-// <div data-controller="hello">
-//   <h1 data-target="hello.output"></h1>
-// </div>
-
 import { Controller } from "stimulus"
 
 export default class extends Controller {
   static classes = [ "on", "off", "translateOn", "translateOff", "invisible" ]
-  static targets = [ "button", "switch", "checkbox", "endDate" ]
+  static targets = [ "button", "switch", "checkbox" ]
+  static values = {
+    enabledEventName: String,
+    disabledEventName: String,
+    enabled: Boolean
+  }
 
   initialize() {
-    if(!this.checkboxTarget.checked) {
-      this.buttonTarget.classList.replace(this.onClass, this.offClass)
-      this.switchTarget.classList.replace(this.translateOnClass, this.translateOffClass)
-      this.endDateTarget.classList.remove(this.invisibleClass)
+    if(this.checkboxTarget.checked) {
+      this.enabledValue = false
     } else {
-      this.buttonTarget.classList.replace(this.offClass, this.onClass)
-      this.switchTarget.classList.replace(this.translateOffClass, this.translateOnClass)
-      this.endDateTarget.classList.add(this.invisibleClass)
+      this.enabledValue = true
     }
   }
 
   update(event) {
-    if(this.buttonTarget.classList.contains(this.onClass)) {
+    if(this.enabledValue) {
+      this.enabledValue = false
+    } else {
+      this.enabledValue = true
+    }
+  }
+
+  enabledValueChanged () {
+    if (this.enabledValue) {
+      window.dispatchEvent(new CustomEvent(this.enabledEventNameValue))
+      this.checkboxTarget.checked = false
       this.buttonTarget.classList.replace(this.onClass, this.offClass)
       this.switchTarget.classList.replace(this.translateOnClass, this.translateOffClass)
-      this.checkboxTarget.checked = false
-      this.buttonTarget.focus();
-      this.endDateTarget.classList.remove(this.invisibleClass)
+      this.buttonTarget.focus()
     } else {
+      window.dispatchEvent(new CustomEvent(this.disabledEventNameValue))
+      this.checkboxTarget.checked = true
       this.buttonTarget.classList.replace(this.offClass, this.onClass)
       this.switchTarget.classList.replace(this.translateOffClass, this.translateOnClass)
-      this.checkboxTarget.checked = true
-      this.buttonTarget.blur();
-      this.endDateTarget.classList.add(this.invisibleClass)
+      this.buttonTarget.blur()
     }
-
   }
 }

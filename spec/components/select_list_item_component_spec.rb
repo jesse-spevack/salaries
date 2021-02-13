@@ -1,13 +1,15 @@
 require "rails_helper"
 
 RSpec.describe SelectListItemComponent, type: :component do
-  pending "add some examples to (or delete) #{__FILE__}"
+  subject(:select_list_item) { described_class.new(selected: selected, value: value) }
 
-  # it "renders something useful" do
-  #   expect(
-  #     render_inline(described_class.new(attr: "value")) { "Hello, components!" }.css("p").to_html
-  #   ).to include(
-  #     "Hello, components!"
-  #   )
-  # end
+  let(:selected) { "selected" }
+  let(:value) { "value" }
+
+  it "renders a beautiful select list item" do
+    result = render_inline(select_list_item)
+    expect(result.css(:div).count).to eq 1
+    expect(result.css(:span).count).to eq 2
+    expect(result.css(:li).count).to eq 1
+  end
 end

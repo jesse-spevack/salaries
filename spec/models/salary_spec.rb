@@ -40,4 +40,13 @@ RSpec.describe Salary, type: :model do
     it { should belong_to(:user) }
     it { should belong_to(:location).optional }
   end
+
+  describe "#city" do
+    let(:location) { create(:location) }
+    subject(:salary) { create(:salary, location: location) }
+
+    it "returns location name" do
+      expect(salary.city).to eq location.name
+    end
+  end
 end
