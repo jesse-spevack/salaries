@@ -29,7 +29,7 @@
         controller: "field-hider",
         action: "remote-enabled-event@window->field-hider#show remote-disabled-event@window->field-hider#hide",
         field_hider_hidden_class: "hidden",
-        field_hider_input_old_value: @salary.city
+        field_hider_input_old_value: @salary.location&.name
       }
     ) do %>
       <%= content_tag(:div, class: "pb-6") do %>

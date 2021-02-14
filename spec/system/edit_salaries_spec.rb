@@ -24,15 +24,16 @@ RSpec.describe "Editing salaries", type: :system do
 
     scenario "switching remote to non remote" do
       user = mock_auth_hash
-      salary = create(:salary, :remote, user: user)
+      create(:salary, :remote, user: user)
 
       visit root_path
       click_link "slack-login"
 
       click_link "Edit"
       find(:xpath, remote_xpath).click
+      location_field = find("#salary_location_attributes_name")
 
-      expect(page).to_not have_content "Remote"
+      expect(location_field.value).to eq ""
     end
   end
 end
