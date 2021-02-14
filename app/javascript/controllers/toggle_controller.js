@@ -2,7 +2,7 @@ import { Controller } from "stimulus"
 
 export default class extends Controller {
   static classes = [ "on", "off", "translateOn", "translateOff", "invisible" ]
-  static targets = [ "button", "switch", "checkbox" ]
+  static targets = [ "button", "switch", "field" ]
   static values = {
     enabledEventName: String,
     disabledEventName: String,
@@ -10,10 +10,10 @@ export default class extends Controller {
   }
 
   initialize() {
-    if(this.checkboxTarget.checked) {
-      this.enabledValue = false
-    } else {
+    if(this.fieldTarget.value === "true") {
       this.enabledValue = true
+    } else {
+      this.enabledValue = false
     }
   }
 
@@ -26,15 +26,15 @@ export default class extends Controller {
   }
 
   enabledValueChanged () {
-    if (this.enabledValue) {
+    if (!this.enabledValue) {
       window.dispatchEvent(new CustomEvent(this.enabledEventNameValue))
-      this.checkboxTarget.checked = false
+      this.fieldTarget.value = false
       this.buttonTarget.classList.replace(this.onClass, this.offClass)
       this.switchTarget.classList.replace(this.translateOnClass, this.translateOffClass)
       this.buttonTarget.focus()
     } else {
       window.dispatchEvent(new CustomEvent(this.disabledEventNameValue))
-      this.checkboxTarget.checked = true
+      this.fieldTarget.value = true
       this.buttonTarget.classList.replace(this.offClass, this.onClass)
       this.switchTarget.classList.replace(this.translateOffClass, this.translateOnClass)
       this.buttonTarget.blur()

@@ -6,7 +6,7 @@ RSpec.describe ToggleSwitchComponent, type: :component do
   let(:form) { double }
   let(:result) { render_inline(toggle_switch) }
 
-  before { allow(form).to receive(:check_box).and_return(nil) }
+  before { allow(form).to receive(:hidden_field).and_return(nil) }
 
   it "renders a beautiful toggle switch" do
     expect(result.css("span").count).to eq 4

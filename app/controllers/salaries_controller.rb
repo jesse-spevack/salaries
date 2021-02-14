@@ -56,7 +56,7 @@ class SalariesController < ApplicationController
         format.json { render :show, status: :ok, location: @salary }
       else
         format.html do
-          flash.now[:error] = {title: "Salary could not be updated.", list: @salary.errors.map(&:full_message)}
+          flash.now[:error] = {title: "Salary could not be updated.", list: @salary.errors.map(&:message)}
           render :new
         end
         format.json { render json: @salary.errors, status: :unprocessable_entity }
