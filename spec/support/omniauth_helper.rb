@@ -9,7 +9,6 @@ module OmniauthHelper
         user_id: slack_id
       }
     )
-
     user
   end
 end

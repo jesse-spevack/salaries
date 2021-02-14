@@ -56,6 +56,7 @@ group :test do
   gem "selenium-webdriver"
   gem "shoulda-matchers"
   gem "simplecov", require: false
+  gem "webmock"
 end
 
 group :development do

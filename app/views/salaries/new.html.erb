@@ -1,4 +1,12 @@
-<%= form_with(model: @salary, data: { controller: "validate", validate_disabled_class: "opacity-50" }, class: "space-y-8 divide-y divide-transparent") do |form| %>
+<%= form_with(
+  model: @salary,
+  data: { 
+    controller: "validate",
+    validate_disabled_class: "opacity-50",
+    action: "search-list-invalid-entry-detected-event@window->validate#invalidSearchList search-list-valid-entry-detected-event@window->validate#validSearchList"
+  },
+  class: "space-y-8 divide-y divide-transparent"
+) do |form| %>
   <%= content_tag(:div, class: "space-y-8 divide-y divide-transparent sm:space-y-5") do %>
     <%= content_tag(:div) do %>
       <%= render(FormHeaderComponent.new(title: "Salary", subtitle: "This information will be aggregated into the Turing Salaries Dataset.")) %>
@@ -15,15 +23,31 @@
       ) %>
     <% end %> 
 
-    <%= form.fields_for :location do |location| %>
-      <%= content_tag(:dl, class: "space-y-6 sm:space-y-5") do %>
-        <%= content_tag(:div, class: "sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5") do %>
-          <%= location.label "location", class: "block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2" %>
-          <%= content_tag(:div, class: "mt-1 relative col-span-1") do %>
-            <%= content_tag(:span, class: "flex-grow") do %>
-              <%= content_tag(:div, class: "w-full max-w-xs") do %>
-                <%= render(SearchListComponent.new(form: location, title: "name", item: @salary.location, collection: [""])) %>
-                <%= content_tag(:p, "Leave blank for remote.", class: "mt-2 text-sm text-gray-500") %>
+    <%= content_tag(
+      :div,
+      data: { 
+        controller: "field-hider",
+        action: "remote-enabled-event@window->field-hider#show remote-disabled-event@window->field-hider#hide",
+        field_hider_hidden_class: "hidden",
+        field_hider_input_old_value: @salary.city
+      }
+    ) do %>
+      <%= content_tag(:div, class: "pb-6") do %>
+        <%= render(ToggleSwitchComponent.new(form: form, attribute: :remote)) %>
+      <% end %> 
+
+      <%= content_tag(:div, data: { field_hider_target: "field" }) do %>
+        <%= form.fields_for :location do |location| %>
+          <%= content_tag(:dl, class: "space-y-6 sm:space-y-5") do %>
+            <%= content_tag(:div, class: "sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5") do %>
+              <%= location.label "city", class: "block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2" %>
+              <%= content_tag(:div, class: "mt-1 relative col-span-1") do %>
+                <%= content_tag(:span, class: "flex-grow") do %>
+                  <%= content_tag(:div, class: "w-full max-w-xs") do %>
+                    <%= render(SearchListComponent.new(form: location, title: "name", item: @salary.location, collection: [""])) %>
+                    <%= content_tag(:p, "", data: { validate_target: "searchListErrorText" }, class: "mt-2 text-sm text-red-700") %>
+                  <% end %>
+                <% end %>
               <% end %>
             <% end %>
           <% end %>
@@ -31,26 +55,24 @@
       <% end %>
     <% end %>
 
-    <%= content_tag(:div, 
+    <%= content_tag(:div, class: "pb-6") do %>
+      <%= render(TextFieldComponent.new(form: form, attribute: :start_date, icon: "calendar", data: { controller: "flatpickr", flatpickr_date_format: "Y-m-d" })) %>
+    <% end %> 
+
+    <%= content_tag(
+      :div,
       data: { 
-        controller: "toggle",
-        toggle_on_class:  "bg-indigo-600",
-        toggle_off_class:  "bg-gray-600",
-        toggle_translate_on_class:  "translate-x-5",
-        toggle_translate_off_class:  "translate-x-0",
-        toggle_invisible_class:  "invisible",
+        controller: "field-hider",
+        action: "current-salary-enabled-event@window->field-hider#show current-salary-disabled-event@window->field-hider#hide",
+        field_hider_hidden_class: "hidden",
+        field_hider_input_old_value: @salary.end_date
       }
     ) do %>
-
       <%= content_tag(:div, class: "pb-6") do %>
         <%= render(ToggleSwitchComponent.new(form: form, attribute: :current_salary)) %>
       <% end %> 
 
-      <%= content_tag(:div, class: "pb-6") do %>
-        <%= render(TextFieldComponent.new(form: form, attribute: :start_date, icon: "calendar", data: { controller: "flatpickr", flatpickr_date_format: "Y-m-d" })) %>
-      <% end %> 
-
-      <%= content_tag(:div, data: { toggle_target: "endDate" }) do %>
+      <%= content_tag(:div, data: { field_hider_target: "field" }) do %>
         <%= render(TextFieldComponent.new(form: form, attribute: :end_date, icon: "calendar", data: { controller: "flatpickr", flatpickr_date_format: "Y-m-d" })) %>
       <% end %> 
     <% end %> 

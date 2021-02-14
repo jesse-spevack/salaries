@@ -1,4 +1,19 @@
-<%= content_tag(:div, class: "sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5") do %>
+<%= content_tag(
+  :div,
+  data: {
+    controller: "toggle",
+    toggle_on_class:  @toggle_on_class,
+    toggle_off_class:  @toggle_off_class,
+    toggle_translate_on_class:  @toggle_translate_on_class,
+    toggle_translate_off_class:  @toggle_translate_off_class,
+    toggle_invisible_class:  @toggle_invisible_class,
+    toggle_enabled_event_name_value:  @toggle_enabled_event_name_value,
+    toggle_disabled_event_name_value:  @toggle_disabled_event_name_value,
+    toggle_enabled_value: false,
+    toggle_invert_value: @toggle_invert_value
+  },
+  class: "sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5"
+) do %>
   <%= content_tag(:span, class: "flex-grow flex flex-col", id: "toggleLabel") do %>
     <%= content_tag(:span, @attribute.to_s.titleize, class: "block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2") %>
   <% end %>

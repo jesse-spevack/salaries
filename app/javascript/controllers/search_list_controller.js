@@ -26,13 +26,15 @@ export default class extends Controller {
     itemId: Number,
     path: String,
     placeId: String,
-    selectItemIndex: Number
+    selectItemIndex: Number,
+    validPlaces: Array
   }
 
   populateList (event) {
     const places = event.detail
     const ul = this.listTarget.firstElementChild
     const li = ul.firstElementChild
+    let validPlaces = []
 
     while(ul.firstChild) {
       ul.removeChild(ul.lastChild)
@@ -40,13 +42,18 @@ export default class extends Controller {
 
     for (const place of places)  {
       let newLi = li.cloneNode(true)
-      newLi.firstElementChild.innerText = place.description
-      newLi.id = place.placeId
+      let placeName = place.description
+      let placeId = place.placeId
+      let validPlace = { name: placeName, placeId: placeId }
+      validPlaces.push(validPlace)
+
+      newLi.firstElementChild.innerText = placeName 
       newLi.classList.remove("bg-indigo-600", "text-white")
       newLi.lastElementChild.classList.add("hidden")
       ul.appendChild(newLi)
     }
 
+    this.validPlacesValue = validPlaces
     this.showList()
   }
 
@@ -59,7 +66,6 @@ export default class extends Controller {
   }
 
   hideList(event) {
-    console.log("hiding")
     this.listTarget.classList.replace(this.showClass, this.hideClass)
     this.listTarget.classList.remove("z-10")
     this.listTarget.classList.add("hidden")
@@ -91,18 +97,26 @@ export default class extends Controller {
 
   choose (event) {
     const newValue = event.target.innerText
-    const placeId = event.target.id
+    const validPlace = this.validPlacesValue.find(validPlace => {
+      return (validPlace.name == newValue)
+    })
+
+    const newPlaceId = validPlace.placeId
 
     this.itemValue = newValue 
-    this.placeIdValue = placeId 
+    this.placeIdValue = newPlaceId 
+    this.placeIdTarget.value = newPlaceId 
     this.inputTarget.value = newValue
+
+    const searchListValidEntryDetected = new CustomEvent("search-list-valid-entry-detected-event")
+    window.dispatchEvent(searchListValidEntryDetected)
 
     this.setChecks()
     this.hideList()
   }
 
-  placeIdValueChanged() {
-    this.placeIdTarget.value = this.placeIdValue
-    console.log("place id changed")
+  emitInvalidEntryDetectedEvent () {
+    const searchListInvalidEntryDetected = new CustomEvent("search-list-invalid-entry-detected-event")
+    window.dispatchEvent(searchListInvalidEntryDetected)
   }
 }

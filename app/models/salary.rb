@@ -4,7 +4,7 @@ class Salary < ApplicationRecord
   belongs_to :user
   belongs_to :location, optional: true
 
-  accepts_nested_attributes_for :location
+  accepts_nested_attributes_for :location, reject_if: :all_blank
 
   validates :amount, presence: true
   validates_numericality_of :amount, only_integer: true, greater_than: MINIMUM_SALARY
@@ -13,8 +13,8 @@ class Salary < ApplicationRecord
   validate :end_date_after_start_date
   validate :end_date_must_be_blank_if_current_salary
 
-  def location_attributes=(location_attributes)
-    self.location = Location.from_attributes(location_attributes)
+  def city
+    location.name
   end
 
   private
@@ -25,7 +25,7 @@ class Salary < ApplicationRecord
 
   def end_date_after_start_date
     return if current_salary
-    errors.add(:end_date, "must be after the start date.") if end_date <= start_date
+    errors.add(:end_date, "must be after the start date.") if end_date.present? && end_date <= start_date
   end
 
   def end_date_must_be_blank_if_current_salary

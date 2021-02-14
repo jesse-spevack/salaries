@@ -16,7 +16,9 @@
     search_list_hidden_class: "hidden",
     search_list_select_item_index_value: -1,
     search_list_select_item_value: "",
-    search_list_place_id_value: @item.place_id
+    search_list_place_id_value: @item.place_id,
+    search_list_valid_places_value: [],
+    places_env_value: Rails.env
   }
 ) do %>
   <%= content_tag(:div, class: "mt-1 relative col-span-1") do %>
@@ -28,7 +30,7 @@
       aria_labelledby: "listbox-label",
       class: "bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
       data: {
-        action: "keyup->places#getList",
+        action: "keyup->places#getList keyup->search-list#emitInvalidEntryDetectedEvent",
         search_list_target: "input",
       }
     ) %>
@@ -71,5 +73,5 @@
       <% end %>
     <% end %>
   <% end %>
-  <%= @form.hidden_field(:place_id, id: "place_id", data: { search_list_target: "placeId" }) %>
+  <%= @form.hidden_field(:place_id, id: "place_id", value: @item.place_id, data: { search_list_target: "placeId" }) %>
 <% end %>
