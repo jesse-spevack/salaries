@@ -21,5 +21,18 @@ RSpec.describe "Editing salaries", type: :system do
       expect(current_path).to eq profile_path
       expect(salary.reload.remote?).to eq true
     end
+
+    scenario "switching remote to non remote" do
+      user = mock_auth_hash
+      salary = create(:salary, :remote, user: user)
+
+      visit root_path
+      click_link "slack-login"
+
+      click_link "Edit"
+      find(:xpath, remote_xpath).click
+
+      expect(page).to_not have_content "Remote"
+    end
   end
 end
