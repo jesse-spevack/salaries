@@ -20,7 +20,7 @@ RSpec.describe "Creating salaries", type: :system do
       click_link "New Salary"
       fill_in("Amount", with: amount)
       fill_in("salary_location_attributes_name", with: "Den")
-      find("li", text: "Denver, CO, USA").click
+      find("li", text: "TEST - Denver, CO, USA - TEST").click
       find(:xpath, start_date_xpath).click
       find(:xpath, back_a_month_xpath).click
       find(:xpath, first_day_of_month_xpath).click
