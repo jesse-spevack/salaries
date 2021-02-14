@@ -17,7 +17,7 @@
 require "simplecov"
 require "simplecov_json_formatter"
 require "./spec/support/omniauth_helper"
-require 'webmock/rspec'
+require "webmock/rspec"
 WebMock.disable_net_connect!(allow_localhost: true, allow: "chromedriver.storage.googleapis.com")
 
 SimpleCov.start

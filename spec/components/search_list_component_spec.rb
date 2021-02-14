@@ -4,7 +4,7 @@ RSpec.describe SearchListComponent, type: :component do
   subject(:search_list_component) { described_class.new(form: form, item: item, title: title, collection: collection) }
 
   let(:collection) { [] }
-  let(:form) { double() }
+  let(:form) { double }
   let(:item) { Location.new }
   let(:title) { "my title" }
 

@@ -14,6 +14,6 @@ class ToggleSwitchComponent < ViewComponent::Base
   end
 
   def kebab_attribute
-    @attribute.to_s.gsub("_", "-")
+    @attribute.to_s.tr("_", "-")
   end
 end
