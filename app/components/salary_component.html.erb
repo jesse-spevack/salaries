@@ -1,6 +1,6 @@
 <%= content_tag(:tr, data: { alert_target: "row", alert_id_value: @salary.id }) do %>
   <%= render(TableBoldDataComponent.new(text: number_to_currency(@salary.amount))) %>
-  <%= render(TableDataComponent.new(text: @salary.location&.name)) %>
+  <%= render(TableDataComponent.new(text: @salary.city)) %>
   <%= render(TableDataComponent.new(text: @salary.start_date)) %>
   <%= render(TableDataComponent.new(text: @salary.end_date)) %>
   <%= content_tag(:td, class: "px-6 py-4 whitespace-nowrap text-sm text-gray-500") do %>

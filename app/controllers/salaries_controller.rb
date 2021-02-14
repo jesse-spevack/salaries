@@ -87,6 +87,6 @@ class SalariesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def salary_params
-    params.require(:salary).permit(:amount, :start_date, :end_date, :current_salary, location_attributes: [:name, :place_id]).merge(user: current_user)
+    params.require(:salary).permit(:amount, :start_date, :end_date, :current_salary, :remote, location_attributes: [:name, :place_id]).merge(user: current_user)
   end
 end
