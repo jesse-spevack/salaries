@@ -5,6 +5,7 @@ class Salary < ApplicationRecord
   belongs_to :location, optional: true
 
   accepts_nested_attributes_for :location, reject_if: :all_blank
+  before_save :remove_location, if: proc { will_save_change_to_remote?(to: true) }
 
   validates :amount, presence: true
   validates_numericality_of :amount, only_integer: true, greater_than: MINIMUM_SALARY
@@ -14,7 +15,11 @@ class Salary < ApplicationRecord
   validate :end_date_must_be_blank_if_current_salary
 
   def city
-    location.name
+    location&.name || "Remote"
+  end
+
+  def remove_location
+    self.location = nil
   end
 
   private

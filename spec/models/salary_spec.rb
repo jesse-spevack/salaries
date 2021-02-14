@@ -42,11 +42,31 @@ RSpec.describe Salary, type: :model do
   end
 
   describe "#city" do
-    let(:location) { create(:location) }
-    subject(:salary) { create(:salary, location: location) }
+    context "when location is present" do
+      subject(:salary) { create(:salary, location: location) }
+      let(:location) { create(:location) }
 
-    it "returns location name" do
-      expect(salary.city).to eq location.name
+      it "returns location name" do
+        expect(salary.city).to eq location.name
+      end
+    end
+
+    context "when location is nil" do
+      subject(:salary) { create(:salary, location: nil) }
+
+      it "returns remote" do
+        expect(salary.city).to eq "Remote"
+      end
+    end
+  end
+
+  describe "before_save" do
+    context "when save change to remote" do
+      subject(:salary) { create(:salary) }
+
+      it "sets location to nil" do
+        expect { salary.update(remote: true) }.to change { salary.location }.from(kind_of(Location)).to(nil)
+      end
     end
   end
 end

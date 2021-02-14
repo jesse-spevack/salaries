@@ -73,5 +73,14 @@
       <% end %>
     <% end %>
   <% end %>
-  <%= @form.hidden_field(:place_id, id: "place_id", value: @item.place_id, data: { search_list_target: "placeId" }) %>
+  <%= content_tag(
+    :div,
+    data: { 
+      controller: "place-id",
+      action: "remote-enabled-event@window->place-id#restore remote-disabled-event@window->place-id#clear",
+      place_id_old_value: @item.place_id 
+    }
+  ) do %>
+    <%= @form.hidden_field(:place_id, id: "place_id", value: @item.place_id, data: { search_list_target: "placeId", place_id_target: "field" }) %>
+  <% end %>
 <% end %>
