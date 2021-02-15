@@ -69,4 +69,26 @@ RSpec.describe Salary, type: :model do
       end
     end
   end
+
+  describe "location_attributes=" do
+    subject(:salary) { create(:salary, location: location) }
+
+    let!(:location) { create(:location) }
+
+    context "when one or more attribute is blank" do
+      let(:attributes) { {"place_id" => ""} }
+
+      it "sets location association to nil" do
+        expect { salary.location_attributes = attributes }.to change { salary.location }.from(kind_of(Location)).to(nil)
+      end
+    end
+
+    context "when all attributes are present" do
+      let(:attributes) { {"place_id" => "123", "name" => "my place"} }
+
+      it "sets location association to nil" do
+        expect { salary.location_attributes = attributes }.to change { Location.count }.from(1).to(2)
+      end
+    end
+  end
 end
