@@ -13,7 +13,7 @@
   },
   class: "sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5"
 ) do %>
-  <%= content_tag(:span, class: "flex-grow flex flex-col", id: "toggleLabel") do %>
+  <%= content_tag(:span, class: "flex-grow flex flex-col pb-2 sm:pb-0", id: "toggleLabel") do %>
     <%= content_tag(:span, @attribute.to_s.titleize, class: "block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2") %>
   <% end %>
 
