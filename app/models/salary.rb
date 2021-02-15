@@ -4,15 +4,24 @@ class Salary < ApplicationRecord
   belongs_to :user
   belongs_to :location, optional: true
 
-  accepts_nested_attributes_for :location, reject_if: :all_blank
+  accepts_nested_attributes_for :location
   before_save :remove_location, if: proc { will_save_change_to_remote?(to: true) }
 
-  validates :amount, presence: true
   validates_numericality_of :amount, only_integer: true, greater_than: MINIMUM_SALARY
+  validates :amount, presence: true
   validates :end_date, presence: true, unless: :current_salary
+
   validate :start_date_in_past
   validate :end_date_after_start_date
   validate :end_date_must_be_blank_if_current_salary
+
+  # Ensure we do not try to save an invalid location
+  # when one or more location attributes are blank.
+  def location_attributes=(attributes)
+    self.location = if attributes.values.none?(&:blank?)
+      Location.find_or_create_by(attributes)
+    end
+  end
 
   def city
     location&.name || "Remote"
