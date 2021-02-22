@@ -4,6 +4,7 @@ class ProfilesController < ApplicationController
   def create
     @profile = Profile.new(user: current_user)
     @profile.graduation_year = params[:graduation_year]
+    @profile.program = params[:program]
     if @profile.save
       head :created
     else
