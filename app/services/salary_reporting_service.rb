@@ -15,9 +15,9 @@ class SalaryReportingService
       WHERE
         salaries.current_salary = true
       GROUP BY
-        1
+        graduation_year
       ORDER BY
-        1
+        graduation_year
     SQL
 
     ActiveRecord::Base.connection.execute(sql)
@@ -26,7 +26,7 @@ class SalaryReportingService
   def salaries_by_years_of_experience
     sql = <<-SQL
       SELECT
-        CAST(EXTRACT(YEAR FROM salaries.start_date) AS INTEGER) - profiles.graduation_year AS years_of_xp,
+        CAST(EXTRACT(YEAR FROM salaries.start_date) AS INTEGER) - profiles.graduation_year AS years_of_experience,
         COUNT(salaries.id) AS submission_count,
         CAST(AVG(salaries.amount) AS INTEGER) AS average_salary,
         MIN(salaries.amount) AS minimum_salary,
@@ -36,9 +36,9 @@ class SalaryReportingService
         JOIN users ON salaries.user_id = users.id
         JOIN profiles ON users.id = profiles.user_id
       GROUP BY
-        1
+        years_of_experience 
       ORDER BY
-        1 DESC
+        years_of_experience DESC
     SQL
 
     ActiveRecord::Base.connection.execute(sql)

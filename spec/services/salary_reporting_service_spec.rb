@@ -58,7 +58,7 @@ describe SalaryReportingService do
     let(:result) { service.salaries_by_years_of_experience }
     let(:expected1) do
       {
-        "years_of_xp" => 1,
+        "years_of_experience" => 1,
         "submission_count" => 1,
         "average_salary" => 95000,
         "minimum_salary" => 95000,
@@ -68,7 +68,7 @@ describe SalaryReportingService do
 
     let(:expected2) do
       {
-        "years_of_xp" => 0,
+        "years_of_experience" => 0,
         "submission_count" => 2,
         "average_salary" => 80000,
         "minimum_salary" => 75000,
