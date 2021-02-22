@@ -8,3 +8,13 @@
     collection: Profile::VALID_GRADUATION_YEARS
   )
 ) %>
+
+<%= render(
+  ProfileRowComponent.new(
+    item: @profile.program,
+    item_id: @profile.id,
+    attribute: "program",
+    path: "profiles",
+    collection: Profile::VALID_PROGRAMS
+  )
+) %>
