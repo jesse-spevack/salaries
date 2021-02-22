@@ -10,8 +10,11 @@ RSpec.describe "CRUD profile", type: :system do
     visit root_path
     click_link "slack-login"
     click_on("Select Graduation year")
+    save_and_open_page
     expect(page).to_not have_content(future_year)
     page.find("li", text: "2017").click
+    click_on("Select Program")
+    page.find("li", text: "Back-End").click
 
     expect(current_path).to eq profile_path
     expect(page).to have_content("2017")
