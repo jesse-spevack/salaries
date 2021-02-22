@@ -26,7 +26,7 @@ class SalaryReportingService
   def salaries_by_years_of_experience
     sql = <<-SQL
       SELECT
-        CAST(EXTRACT(YEAR FROM salaries.start_date) AS INTEGER) - CAST(profiles.graduation_year AS INTEGER) AS years_of_experience,
+        CAST(EXTRACT(YEAR FROM salaries.start_date) AS INTEGER) - profiles.graduation_year AS years_of_experience,
         COUNT(salaries.id) AS submission_count,
         CAST(AVG(salaries.amount) AS INTEGER) AS average_salary,
         MIN(salaries.amount) AS minimum_salary,
