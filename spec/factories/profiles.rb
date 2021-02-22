@@ -4,5 +4,6 @@ FactoryBot.define do
   factory :profile do
     user
     graduation_year { 2017 }
+    program { "Back-End" }
   end
 end
