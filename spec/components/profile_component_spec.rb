@@ -7,5 +7,6 @@ RSpec.describe ProfileComponent, type: :component do
 
   it "renders a beautiful profile row component" do
     expect(result.css("dt").to_html).to include "Graduation year"
+    expect(result.css("dt").to_html).to include "Program"
   end
 end
