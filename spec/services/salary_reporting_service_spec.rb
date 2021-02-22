@@ -49,9 +49,13 @@ describe SalaryReportingService do
       user_2017 = create(:user, profile: create(:profile, graduation_year: 2017))
       user_2018 = create(:user, profile: create(:profile, graduation_year: 2018))
 
+      # 0 years of experience
       create(:salary, :remote, user: user_2017, start_date: "2017-03-20", end_date: "2018-06-01", amount: 75000)
+
+      # 1 year of experience
       create(:salary, :remote, user: user_2017, start_date: "2018-06-20", end_date: nil, current_salary: true, amount: 95000)
 
+      # 0 years of experience
       create(:salary, :remote, user: user_2018, start_date: "2018-03-20", end_date: nil, current_salary: true, amount: 85000)
     end
 

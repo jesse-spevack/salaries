@@ -8,4 +8,9 @@ Rails.application.routes.draw do
   get "profile", action: :show, controller: "users"
   resources :salaries
   resources :profiles, only: [:create, :update]
+
+  namespace :reporting do
+    get "current_salary_by_graduation_year"
+    get "salaries_by_years_of_experience"
+  end
 end
