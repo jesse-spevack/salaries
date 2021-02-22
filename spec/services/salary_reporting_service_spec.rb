@@ -1,8 +1,6 @@
 require "rails_helper"
 
 describe SalaryReportingService do
-  subject(:service) { described_class.new }
-
   describe "#current_salary_by_graduation_year" do
     before do
       user_2017_1 = create(:user, profile: create(:profile, graduation_year: 2017))
@@ -16,7 +14,7 @@ describe SalaryReportingService do
 
       create(:salary, :remote, user: user_2018, start_date: "2018-03-20", end_date: nil, current_salary: true, amount: 85000)
     end
-    let(:result) { service.current_salary_by_graduation_year }
+    let(:result) { described_class.current_salary_by_graduation_year }
     let(:expected1) do
       {
         "graduation_year" => 2017,
@@ -49,13 +47,17 @@ describe SalaryReportingService do
       user_2017 = create(:user, profile: create(:profile, graduation_year: 2017))
       user_2018 = create(:user, profile: create(:profile, graduation_year: 2018))
 
+      # 0 years of experience
       create(:salary, :remote, user: user_2017, start_date: "2017-03-20", end_date: "2018-06-01", amount: 75000)
+
+      # 1 year of experience
       create(:salary, :remote, user: user_2017, start_date: "2018-06-20", end_date: nil, current_salary: true, amount: 95000)
 
+      # 0 years of experience
       create(:salary, :remote, user: user_2018, start_date: "2018-03-20", end_date: nil, current_salary: true, amount: 85000)
     end
 
-    let(:result) { service.salaries_by_years_of_experience }
+    let(:result) { described_class.salaries_by_years_of_experience }
     let(:expected1) do
       {
         "years_of_experience" => 1,
