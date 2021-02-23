@@ -41,9 +41,9 @@ end
 
 def locations
   [
-    { place_id: "ChIJzxcfI6qAa4cR1jaKJ_j0jhE", name: "Denver, CO, USA", created_at: now, updated_at: now},
-    { place_id: "ChIJIQBpAG2ahYAR_6128GcTUEo", name: "San Francisco, CA, USA", created_at: now, updated_at: now },
-    { place_id: "ChIJOwg_06VPwokRYv534QaPC8g", name: "New York, NY, USA", created_at: now, updated_at: now },
+    {place_id: "ChIJzxcfI6qAa4cR1jaKJ_j0jhE", name: "Denver, CO, USA", created_at: now, updated_at: now},
+    {place_id: "ChIJIQBpAG2ahYAR_6128GcTUEo", name: "San Francisco, CA, USA", created_at: now, updated_at: now},
+    {place_id: "ChIJOwg_06VPwokRYv534QaPC8g", name: "New York, NY, USA", created_at: now, updated_at: now},
   ]
 end
 
@@ -58,8 +58,8 @@ def salaries
     year2, month2, day2 = datum["start2"].split("-").map(&:to_i) if amount2
     year3, month3, day3 = datum["start3"].split("-").map(&:to_i) if amount3
 
-    current1 = amount2.blank? 
-    current2 = amount3.blank? 
+    current1 = amount2.blank?
+    current2 = amount3.blank?
 
     end_date1 = Date.new(year2, month2, day2) - 1.week if amount2
     end_date2 = Date.new(year3, month3, day3) - 1.week if amount3
