@@ -61,7 +61,7 @@ $ git clone https://github.com/jesse-spevack/salaries.git
 $ cd salaries
 $ gem install bundler # if working with ruby version below 3.0.0
 $ bundle install
-$ rails db:{create,migrate} # configure dev and test databases
+$ rails db:{drop,create,migrate,seed} # configure dev and test databases
 $ yarn
 $ bundle exec rspec # run tests
 $ bundle exec standardrb --format progress # run standard ruby linter
