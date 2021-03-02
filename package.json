@@ -7,6 +7,8 @@
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "rails/webpacker",
     "autoprefixer": "^10.1.0",
+    "chart.js": "^2.9.4",
+    "chartkick": "^3.2.1",
     "flatpickr": "^4.6.8",
     "postcss": "^8.2.1",
     "stimulus": "^2.0.0",
