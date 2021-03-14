@@ -1,2 +1,10 @@
-
-<%= @data %>
+<%= line_chart(
+  reporting_salaries_by_years_of_experience_path,
+  colors: ["#4F46E5", "#14B8A6", "#C026D3"],
+  download: {filename: "salaries_by_years_of_xp"},
+  id: "salary-line-chart",
+  prefix: "$",
+  thousands: ",",
+  xtitle: "Years of Experience",
+  ytitle: "Salary in Dollars"
+) %>

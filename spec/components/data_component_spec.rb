@@ -1,11 +1,10 @@
 require "rails_helper"
 
 RSpec.describe DataComponent, type: :component do
-  subject(:data_component) { described_class.new(data: data) }
-  let(:data) { ["test"] }
+  subject(:data_component) { described_class.new }
   let(:result) { render_inline(data_component) }
 
-  it "renders line chart data" do
-    expect(result.to_html.include?(data[0])).to be(true)
+  it "renders a line chart" do
+    expect(result.css("#salary-line-chart").count).to eq(1)
   end
 end

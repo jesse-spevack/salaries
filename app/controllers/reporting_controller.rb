@@ -4,6 +4,8 @@ class ReportingController < ApplicationController
   end
 
   def salaries_by_years_of_experience
-    render json: SalaryReportingService.salaries_by_years_of_experience
+    records = SalaryReportingService.salaries_by_years_of_experience
+
+    render json: ChartService.new(records).salaries_by_years_of_experience
   end
 end
