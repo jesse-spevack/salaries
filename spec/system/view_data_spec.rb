@@ -11,7 +11,7 @@ RSpec.describe "Viewing /data content" do
       it "displays a line chart" do
         click_link "Data"
 
-        expect(page).to have_css("#salary-line-chart")
+        expect(page).to have_css("#reporting-salaries-by-years-of-experience")
       end
     end
   end
