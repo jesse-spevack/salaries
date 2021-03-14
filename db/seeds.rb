@@ -8,7 +8,7 @@
 
 # Location.upsert_all locations
 # Salary.upsert_all salaries
-require 'csv'
+require "csv"
 
 def now
   @now ||= Time.now
@@ -43,7 +43,7 @@ def locations
   [
     {place_id: "ChIJzxcfI6qAa4cR1jaKJ_j0jhE", name: "Denver, CO, USA", created_at: now, updated_at: now},
     {place_id: "ChIJIQBpAG2ahYAR_6128GcTUEo", name: "San Francisco, CA, USA", created_at: now, updated_at: now},
-    {place_id: "ChIJOwg_06VPwokRYv534QaPC8g", name: "New York, NY, USA", created_at: now, updated_at: now},
+    {place_id: "ChIJOwg_06VPwokRYv534QaPC8g", name: "New York, NY, USA", created_at: now, updated_at: now}
   ]
 end
 
