@@ -37,6 +37,7 @@ gem "awesome_print"
 
 gem "view_component", require: "view_component/engine"
 gem "inline_svg"
+gem "chartkick" # Data charts
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

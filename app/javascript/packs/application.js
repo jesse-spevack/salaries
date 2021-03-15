@@ -15,6 +15,8 @@ ActiveStorage.start()
 // import "controllers"
 
 require("stylesheets/application.scss")
+require("chartkick")
+require("chart.js")
 
 import { Application } from "stimulus"
 import { definitionsFromContext } from "stimulus/webpack-helpers"
